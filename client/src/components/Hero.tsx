@@ -171,23 +171,21 @@ export default function Hero() {
           <div className="mb-6 max-w-6xl">
             <AnimatedText delay={0.4}>
               <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold font-display leading-[1.1] tracking-tight mb-4">
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-gray-100 to-gray-300">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-acm-blue to-acm-blue-light">
                   The Next Era of
                 </span>
               </h1>
             </AnimatedText>
 
             <AnimatedText delay={0.6}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display xl:text-7xl font-bold leading-[1.1] tracking-tight">
-                <span className="bg-linear-to-r from-acm-blue via-acm-blue-light to-acm-blue bg-clip-text text-transparent">
-                  GGSIPU EDC ACM
-                </span>
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tight">
+                <span className="text-white">GGSIPU EDC ACM</span>
               </h1>
             </AnimatedText>
 
             <AnimatedText delay={0.8}>
               <h1 className="text-4xl md:text-5xl font-display lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight mt-2">
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-gray-100 to-gray-200">
+                <span className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-[0.9] tracking-tight">
                   Student Chapter
                 </span>
               </h1>
