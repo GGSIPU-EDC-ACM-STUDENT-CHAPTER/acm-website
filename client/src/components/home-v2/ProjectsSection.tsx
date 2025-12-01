@@ -1,283 +1,338 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ArrowUpRight, Calendar } from "lucide-react";
+import { TextReveal } from "../TextReveal";
 
-interface Project {
+interface Event {
   title: string;
   description: string;
-  tags: string;
-  color: string;
-  alignRight: boolean;
-  speed: number;
-  date?: string;
+  tags: string[];
+  date: string;
+  index: string;
   link?: string;
 }
 
-const projects: Project[] = [
+interface UpcomingEvent {
+  title: string;
+  description: string;
+  tags: string[];
+  dateRange: string;
+  registrationLink: string;
+  stats: { label: string; value: string }[];
+}
+
+// Upcoming Events
+const upcomingEvents: UpcomingEvent[] = [
   {
-    title: "SMART DELHI IDEATHON 2025",
-    description:
-      "Smart Delhi Ideathon 2025 brought together students across Delhi to develop tech-based ideas addressing civic challenges like air pollution, waste management, and women's safety. Hosted at GGSIPU East Delhi Campus, it fostered interdisciplinary collaboration and social innovation under 'Youth for Change'.",
-    tags: "#ideathon #urbaninnovation #smartcity #youthforchange",
-    color: "bg-[#1a1a2e]",
-    alignRight: false,
-    speed: -0.7,
-    date: "Dec 24, 2024 – Feb 4, 2025",
-    link: "https://sdi2025.in",
-  },
+    title: "75 DAYS DSA CHALLENGE",
+    description: "Daily problems, weekly contests, mentor-led discussions, and leaderboards to build consistency and prepare for FAANG interviews.",
+    tags: ["Challenge", "Algorithms", "Competitive Programming"],
+    dateRange: "Jan 1 → Mar 15, 2026",
+    registrationLink: "https://forms.gle/acm-dsa-challenge-2026",
+    stats: [
+      { label: "Days", value: "75" },
+      { label: "Problems", value: "150+" },
+      { label: "Contests", value: "10" },
+      { label: "Mentors", value: "5" }
+    ]
+  }
+];
+
+// Past Events (top 6)
+const pastEvents: Event[] = [
   {
-    title: "INDO-AMERICAN EDUCATION SEMINAR",
-    description:
-      "A joint ACM–ACM-W seminar featuring Dr. Ron Buckmire (Dean, Marist University, NY). The talk explored Indo-American higher-education linkages, global scholarships, and AI-driven curricula, inspiring students to pursue international academic opportunities.",
-    tags: "#seminar #international #highereducation #collaboration",
-    color: "bg-[#1e293b]",
-    alignRight: true,
-    speed: -0.25,
-    date: "January 23, 2025",
-  },
-  {
-    title: "KICKSTART WITH ACM",
-    description:
-      "The annual induction session introducing new members to ACM's mission and benefits. Students discovered opportunities in hackathons, research, and leadership roles while learning how to engage with the global ACM community.",
-    tags: "#orientation #induction #community #acm",
-    color: "bg-[#1a1a2e]",
-    alignRight: false,
-    speed: -0.75,
-    date: "August 12, 2025",
-  },
-  {
-    title: "BUILDING AI CHATBOTS",
-    description:
-      "An interactive, hands-on workshop where students built chatbots using Python and OpenAI APIs. Participants learned NLP fundamentals and deployed functional AI chatbots, bridging theory with practice.",
-    tags: "#workshop #ai #python #openai #nlp",
-    color: "bg-[#1e293b]",
-    alignRight: true,
-    speed: -0.25,
-    date: "August 22, 2025",
-  },
-  {
-    title: "FAANG WEEKEND EP 1",
-    description:
-      "The first episode of the flagship #FAANGWeekend series featuring Bharat Ahuja. The session focused on navigating placements at top-tier tech companies with strategies for interview prep, resumes, and resilience.",
-    tags: "#faangweekend #career #microsoft #placements",
-    color: "bg-[#1a1a2e]",
-    alignRight: false,
-    speed: -0.7,
-    date: "August 30, 2025",
-  },
-  {
-    title: "FAANG WEEKEND EP 2",
-    description:
-      "The second episode featured Sanket Singh (Software Engineer II, Meta), sharing practical guidance on SDE interviews, resume optimization, and career growth, broadcast live via YouTube.",
-    tags: "#faangweekend #meta #sde #career #mentorship",
-    color: "bg-[#1e293b]",
-    alignRight: true,
-    speed: -0.25,
-    date: "September 21, 2025",
-  },
-  {
-    title: "HELA CROSSROADS",
-    description:
-      "A collaborative workshop with HeLa Labs introducing students to Web3 fundamentals. Participants created and deployed decentralized applications, smart contracts, and tokens on the HeLa L1 test chain.",
-    tags: "#web3 #blockchain #dapp #smartcontracts",
-    color: "bg-[#1a1a2e]",
-    alignRight: false,
-    speed: -0.75,
-    date: "September 26, 2025",
-  },
-  {
-    title: "SILICON QUEST: ANIMEVERSE 2025",
-    description:
-      "Hosted during Elysian 2025, this anime-themed hackathon blended technology, storytelling, and innovation. Teams built creative prototypes in a gamified coding environment celebrating pop culture and tech.",
-    tags: "#hackathon #elysian #anime #creative #tech",
-    color: "bg-[#1e293b]",
-    alignRight: true,
-    speed: -0.25,
-    date: "October 5 – 7, 2025",
-    link: "https://unstop.com",
+    title: "FAANG WEEKEND EP 3",
+    description: "Senior engineers from Google sharing system design tips and interview strategies.",
+    tags: ["Career", "Google"],
+    date: "Nov 22, 2025",
+    index: "01",
   },
   {
     title: "ACM CODECATALYST 0x6",
-    description:
-      "A 6-day online bootcamp covering Data Structures & Algorithms, Development, and Machine Learning through nightly live sessions. Designed to make advanced topics accessible and ignite continued learning.",
-    tags: "#bootcamp #dsa #development #ml #coding",
-    color: "bg-[#1a1a2e]",
-    alignRight: false,
-    speed: -0.7,
+    description: "A 6-day online bootcamp covering DSA, Development, and Machine Learning.",
+    tags: ["Bootcamp", "DSA"],
     date: "Oct 29 – Nov 3, 2025",
+    index: "02",
+  },
+  {
+    title: "SILICON QUEST: ANIMEVERSE",
+    description: "An anime-themed hackathon blending technology and innovation.",
+    tags: ["Hackathon", "Creative"],
+    date: "Oct 5–7, 2025",
+    index: "03",
+    link: "https://unstop.com",
+  },
+  {
+    title: "HELA CROSSROADS",
+    description: "Workshop with HeLa Labs on Web3 fundamentals and smart contracts.",
+    tags: ["Web3", "Blockchain"],
+    date: "Sep 26, 2025",
+    index: "04",
+  },
+  {
+    title: "FAANG WEEKEND EP 2",
+    description: "Sanket Singh from Meta on SDE interviews and career growth.",
+    tags: ["Career", "Meta"],
+    date: "Sep 21, 2025",
+    index: "05",
+  },
+  {
+    title: "BUILDING AI CHATBOTS",
+    description: "Hands-on workshop building chatbots with Python and OpenAI APIs.",
+    tags: ["Workshop", "AI"],
+    date: "Aug 22, 2025",
+    index: "06",
   },
 ];
 
 /**
- * HOOK: useParallax
- * A simple custom hook to calculate parallax offset based on scroll position.
+ * Upcoming Event Card - Simplified premium design
  */
-export const useParallax = (ref: React.RefObject<HTMLDivElement | null>, speed = 0.5) => {
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Calculate distance from center of viewport
-      const distanceFromCenter = rect.top + rect.height / 2 - windowHeight / 2;
-
-      // Multiply by speed to get the pixel offset
-      setOffset(distanceFromCenter * speed);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial calculation
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [ref, speed]);
-
-  return offset;
-};
+function UpcomingEventCard({ event }: { event: UpcomingEvent }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
+  
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+      className="relative overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-[#0a0a0a] to-[#050505]"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        {/* Left: Visual */}
+        <div className="relative aspect-4/3 lg:aspect-auto lg:min-h-[500px] bg-linear-to-br from-[#0d1117] to-[#080808] flex items-center justify-center">
+          {/* Large Number */}
+          <span className="text-[140px] md:text-[200px] font-black text-white/5 select-none" style={{ fontFamily: "var(--font-heading)" }}>
+            75
+          </span>
+          <p className="absolute bottom-1/3 text-white/40 text-sm tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-body)" }}>
+            Days of Code
+          </p>
+          
+          {/* Badge */}
+          <div className="absolute top-6 left-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-acm-blue/90">
+            <span className="relative flex h-2 w-2">
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+            </span>
+            <span className="text-xs font-semibold text-white uppercase tracking-wider" style={{ fontFamily: "var(--font-body)" }}>
+              Upcoming
+            </span>
+          </div>
+        </div>
+        
+        {/* Right: Content */}
+        <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+          {/* Date */}
+          <div className="flex items-center gap-3 mb-4">
+            <Calendar className="w-4 h-4 text-acm-blue" />
+            <span className="text-acm-blue font-medium tracking-wide" style={{ fontFamily: "var(--font-body)" }}>
+              {event.dateRange}
+            </span>
+          </div>
+          
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {event.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/60 border border-white/15 rounded-full"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          {/* Title */}
+          <h3
+            className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            {event.title}
+          </h3>
+          
+          {/* Description */}
+          <p
+            className="text-white/50 text-base leading-relaxed mb-8"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {event.description}
+          </p>
+          
+          {/* Stats */}
+          <div className="grid grid-cols-4 gap-4 mb-8 py-6 border-y border-white/10">
+            {event.stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <span className="block text-2xl font-black text-white" style={{ fontFamily: "var(--font-heading)" }}>
+                  {stat.value}
+                </span>
+                <span className="text-[9px] uppercase tracking-wider text-white/40" style={{ fontFamily: "var(--font-body)" }}>
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+          
+          {/* CTA */}
+          <a
+            href={event.registrationLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-acm-blue text-white font-semibold text-sm uppercase tracking-wider transition-all duration-300 hover:bg-acm-blue/90"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            <span>Register Now</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 /**
- * COMPONENT: ProjectItem
- * Replicates the structure of the provided reference code
+ * Event Card - Simple and clean
  */
-function ProjectItem({
-  title,
-  description,
-  tags,
-  color,
-  alignRight = false,
-  speed = -0.1,
-  date,
-  link,
-}: Project) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Apply parallax to the entire container
-  const yOffset = useParallax(containerRef, speed);
-
+function EventCard({ event, index }: { event: Event; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
+  
   return (
-    <div
-      ref={containerRef}
-      className={`relative w-full h-[100vh] max-w-7xl mx-auto py-24 px-6 md:px-12 flex flex-col ${alignRight ? "md:flex-row-reverse" : "md:flex-row"
-        } items-center gap-12 md:gap-24`}
-      style={{ transform: `translate3d(0px, ${yOffset}px, 0px)` }}
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: (index % 3) * 0.1 }}
+      className="group relative bg-[#0a0a0a] border border-white/5 p-8 transition-all duration-300 hover:border-white/10"
     >
-      {/* --- Visual Wrapper (Video Placeholder) --- */}
-      <div className="w-full md:w-3/5 relative group">
-        <div className="relative overflow-hidden rounded-lg shadow-2xl transition-transform duration-75 ease-out will-change-transform">
-          {/* Placeholder for Video/Image */}
-          <div
-            className={`w-full aspect-video ${color} flex items-center justify-center text-white/20 font-bold text-xl tracking-widest uppercase`}
+      {/* Index */}
+      <div className="flex items-center gap-3 mb-6">
+        <span className="text-acm-blue text-xs font-medium tracking-widest" style={{ fontFamily: "var(--font-body)" }}>
+          {event.index}
+        </span>
+        <div className="w-6 h-px bg-white/20" />
+        <span className="text-xs text-white/40" style={{ fontFamily: "var(--font-body)" }}>
+          {event.date}
+        </span>
+      </div>
+      
+      {/* Title */}
+      <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+        {event.title}
+      </h3>
+      
+      {/* Description */}
+      <p className="text-white/40 text-sm leading-relaxed mb-6" style={{ fontFamily: "var(--font-body)" }}>
+        {event.description}
+      </p>
+      
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {event.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-2 py-1 text-[10px] uppercase tracking-widest text-white/40 border border-white/10 rounded"
+            style={{ fontFamily: "var(--font-body)" }}
           >
-            Video Placeholder
-          </div>
-
-          {/* Hover Button Overlay */}
-          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer">
-            <div className="bg-white text-black px-6 py-3 rounded-full font-medium flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-              View Site <ArrowUpRight size={18} />
-            </div>
-          </div>
-        </div>
+            {tag}
+          </span>
+        ))}
       </div>
-
-      {/* --- Info Wrapper --- */}
-      <div className="w-full md:w-2/5 flex flex-col relative">
-        {/* The 'Timeline' visual elements */}
-        <div
-          className={`hidden md:block absolute top-0 bottom-0 ${alignRight ? "-right-12" : "-left-12"
-            } w-px bg-gray-700`}
+      
+      {/* Link */}
+      {event.link ? (
+        <a
+          href={event.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+          style={{ fontFamily: "var(--font-body)" }}
         >
-          <div className="absolute top-1/4 -left-[5px] w-[11px] h-[11px] border-2 border-gray-600 rounded-full bg-[#0d0d0d] z-10" />
-        </div>
+          <span>View Event</span>
+          <ArrowUpRight size={14} />
+        </a>
+      ) : (
+        <span className="inline-flex items-center gap-2 text-sm text-white/30" style={{ fontFamily: "var(--font-body)" }}>
+          <span>Completed</span>
+        </span>
+      )}
+    </motion.div>
+  );
+}
 
-        <div
-          className={`space-y-6 ${alignRight ? "md:text-right" : "md:text-left"
-            }`}
-        >
-          {date && (
-            <p className={`text-sm font-mono text-acm-blue ${alignRight ? "ml-auto" : ""}`}>
-              📅 {date}
-            </p>
-          )}
-
-          <h3 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white" style={{ fontFamily: "var(--font-heading)" }}>
-            {title}
-          </h3>
-
-          <div
-            className={`h-px w-12 bg-gray-600 my-4 inline-block ${alignRight ? "ml-auto" : ""
-              }`}
-          />
-
-          <div className="text-lg text-gray-400 leading-relaxed font-normal" style={{ fontFamily: "var(--font-body)" }}>
-            {description}
-          </div>
-
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide leading-loose">
-            {tags}
-          </p>
-
-          {link ? (
-            <a
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`mt-4 text-sm font-bold border-b-2 border-white text-white pb-1 w-max hover:text-acm-blue hover:border-acm-blue transition-colors inline-block ${alignRight ? "ml-auto" : "mr-auto"
-                }`}
-            >
-              VIEW EVENT →
-            </a>
-          ) : (
-            <button
-              className={`mt-4 text-sm font-bold border-b-2 border-white text-white pb-1 w-max hover:text-acm-blue hover:border-acm-blue transition-colors ${alignRight ? "ml-auto" : "mr-auto"
-                }`}
-            >
-              VIEW DETAILS
-            </button>
-          )}
-        </div>
+/**
+ * Section Header
+ */
+function SectionHeader({ title, subtitle, isUpcoming = false }: { title: string; subtitle: string; isUpcoming?: boolean }) {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headerRef, { once: true, margin: "-50px" });
+  
+  return (
+    <motion.div
+      ref={headerRef}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.6 }}
+      className="mb-12"
+    >
+      <div className="flex items-center gap-4 mb-4">
+        <div className="w-12 h-px bg-acm-blue/50" />
+        <span className={`text-[10px] tracking-[0.4em] uppercase ${isUpcoming ? 'text-acm-blue' : 'text-white/30'}`} style={{ fontFamily: "var(--font-body)" }}>
+          {subtitle}
+        </span>
       </div>
-    </div>
+      <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+        <TextReveal text={title} delay={0.1} />
+      </h2>
+    </motion.div>
   );
 }
 
 export default function ProjectsSection() {
   return (
     <section
-      id="projects"
-      className="relative w-full bg-black overflow-hidden z-10"
+      id="events"
+      className="relative w-full bg-black overflow-hidden py-24 md:py-32"
+      style={{ zIndex: 10 }}
     >
-      <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-transparent via-transparent to-black z-5"/>
-      {/* Grid Background - Contained within section */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(75, 85, 99, 0.9) 2px, transparent 2px),
-            linear-gradient(to bottom, rgba(75, 85, 99, 0.9) 2px, transparent 2px)
-          `,
-          backgroundSize: "60px 60px",
-        }}
-      />
-      {/* Content container */}
-      <div className="relative z-10 py-24 overflow-hidden">
-        <div className="container mx-auto">
-          {projects.map((project, index) => (
-            <ProjectItem
-              key={index}
-              title={project.title}
-              description={project.description}
-              tags={project.tags}
-              color={project.color}
-              alignRight={project.alignRight}
-              speed={project.speed}
-              date={project.date}
-              link={project.link}
-            />
-          ))}
+      {/* Background Glow */}
+      <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-acm-blue/3 rounded-full blur-[150px] pointer-events-none" />
+      
+      <div className="relative z-10 px-6 md:px-12 lg:px-20">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Upcoming Events */}
+          <SectionHeader title="Join the Challenge" subtitle="Upcoming Events" isUpcoming />
+          
+          <div className="mb-24">
+            {upcomingEvents.map((event) => (
+              <UpcomingEventCard key={event.title} event={event} />
+            ))}
+          </div>
+          
+          {/* Past Events */}
+          <SectionHeader title="What We've Hosted" subtitle="Past Events" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pastEvents.map((event, index) => (
+              <EventCard key={event.index} event={event} index={index} />
+            ))}
+          </div>
+          
+          {/* View All CTA */}
+          <div className="text-center mt-16">
+            <a
+              href="/events"
+              className="inline-flex items-center gap-3 px-8 py-4 border border-white/15 text-white/60 text-sm uppercase tracking-widest hover:border-white/30 hover:text-white transition-all"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              <span>View All Events</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

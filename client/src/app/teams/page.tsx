@@ -2,11 +2,10 @@ import TeamsHero from "@/components/teams/TeamsHero";
 import TeamSection from "@/components/teams/TeamSection";
 import CinematicScroll from "@/components/teams/CinematicScroll";
 import {
-  facultyCoordinators,
-  officeBearer,
-  acmCreatives,
-  teamLeads,
-  creativeLeads,
+  facultyMembers,
+  officeBearers,
+  technicalTeam,
+  creativeTeam,
 } from "@/data/teamData";
 
 export default function TeamsPage() {
@@ -24,7 +23,7 @@ export default function TeamsPage() {
         <TeamSection
           title="Faculty Coordinators"
           subtitle="PROLOGUE: The Mentors"
-          members={facultyCoordinators}
+          members={facultyMembers}
           sectionNumber="00"
         />
 
@@ -32,32 +31,24 @@ export default function TeamsPage() {
         <TeamSection
           title="The Leadership"
           subtitle="ACT I: Office Bearers"
-          members={officeBearer}
+          members={officeBearers}
           sectionNumber="01"
         />
 
-        {/* ACM Creatives Heads */}
+        {/* Technical Team */}
         <TeamSection
-          title="Creative Vision"
-          subtitle="ACT II: ACM Creatives"
-          members={acmCreatives}
+          title="Technical Knights"
+          subtitle="ACT II: Technical Domain"
+          members={technicalTeam}
           sectionNumber="02"
         />
 
-        {/* Team Leads */}
-        <TeamSection
-          title="Technical Knights"
-          subtitle="ACT III: Team Captains"
-          members={teamLeads}
-          sectionNumber="03"
-        />
-
-        {/* Creative Leads */}
+        {/* Creative Team */}
         <TeamSection
           title="The Artisans"
-          subtitle="ACT IV: Creative Captains"
-          members={creativeLeads}
-          sectionNumber="04"
+          subtitle="ACT III: Creative Domain"
+          members={creativeTeam}
+          sectionNumber="03"
         />
 
         {/* Final Divider */}

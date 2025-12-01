@@ -1,19 +1,17 @@
 "use client";
 
 import { useRef, useCallback, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 /**
  * ParallaxImageSection
- * Video stays fixed and moves UP when scrolling DOWN
- * Visible between About section and Marquee section
+ * Video with subtle parallax effect
  */
 export default function ParallaxImageSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
 
-  // Set video playback speed
   const handleVideoLoad = useCallback(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 4.0;
@@ -21,21 +19,12 @@ export default function ParallaxImageSection() {
     }
   }, []);
 
-  // Track scroll progress through this section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Smooth spring for butter-smooth motion
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  // Video moves UP when scrolling DOWN
-  const videoY = useTransform(smoothProgress, [0, 1], ["10%", "-10%"]);
+  const videoY = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
 
   return (
     <section
@@ -45,9 +34,9 @@ export default function ParallaxImageSection() {
     >
       {/* Video container with overflow hidden for parallax effect */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {/* Video moves inside this container */}
+        {/* Video and text move together inside this container */}
         <motion.div
-          className="absolute w-full h-[100%] -top-[0%] left-0"
+          className="absolute w-full h-[120%] -top-[10%] left-0"
           style={{ y: videoY }}
         >
           <video
@@ -68,7 +57,7 @@ export default function ParallaxImageSection() {
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.4) 100%)",
+              background: "linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.5) 100%)",
             }}
           />
 
@@ -76,7 +65,7 @@ export default function ParallaxImageSection() {
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: "rgba(0, 0, 0, 0.35)",
+              background: "rgba(0, 0, 0, 0.3)",
               backdropFilter: "blur(1px)",
               WebkitBackdropFilter: "blur(1px)",
             }}
@@ -89,66 +78,53 @@ export default function ParallaxImageSection() {
               background: "linear-gradient(135deg, rgba(0,133,202,0.4) 0%, transparent 50%, rgba(0,133,202,0.3) 100%)",
             }}
           />
-        </motion.div>
-      </div>
 
-      {/* Text Content */}
-      <div className="relative z-10 h-full flex items-center justify-center">
-        <div className="text-center px-6 max-w-4xl">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-white/90 text-xs md:text-sm uppercase tracking-[0.4em] mb-4 font-medium"
-            style={{ 
-              fontFamily: "var(--font-body)", 
-              textShadow: "0 2px 20px rgba(0,0,0,0.8)" 
-            }}
-          >
-            Where Ideas Take Flight
-          </motion.p>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[0.95] mb-6"
-            style={{ 
-              fontFamily: "var(--font-heading)", 
-              fontWeight: 900, 
-              textShadow: "0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)" 
-            }}
-          >
-            Building Tomorrow&apos;s
-            <span 
-              className="block mt-2"
-              style={{ 
-                fontFamily: "var(--font-heading)",
-                fontWeight: 900,
-                color: "#0085ca",
-                textShadow: "0 4px 30px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8)"
-              }}
-            >
-              Innovators Today
-            </span>
-          </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="text-white/95 text-sm md:text-base lg:text-lg max-w-xl mx-auto font-normal"
-            style={{ 
-              fontFamily: "var(--font-body)", 
-              textShadow: "0 2px 20px rgba(0,0,0,0.8)" 
-            }}
-          >
-            Join a community of passionate minds pushing the boundaries of technology
-          </motion.p>
-        </div>
+          {/* Text Content - Inside Parallax */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center px-8 md:px-16 lg:px-24 max-w-5xl">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true }}
+                className="mb-6"
+              >
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <div className="w-12 h-px bg-white/40" />
+                  <span className="text-white/60 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "var(--font-body)" }}>
+                    Our Vision
+                  </span>
+                  <div className="w-12 h-px bg-white/40" />
+                </div>
+              </motion.div>
+              
+              <motion.h2
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true }}
+                className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.95] mb-6"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Building Tomorrow&apos;s
+                <span className="block text-acm-blue mt-2">
+                  Innovators
+                </span>
+              </motion.h2>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true }}
+                className="text-white/70 text-sm md:text-base lg:text-lg max-w-xl mx-auto leading-relaxed"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                A community of passionate minds pushing the boundaries of technology and innovation.
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

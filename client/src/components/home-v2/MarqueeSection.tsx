@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 export default function MarqueeSection() {
@@ -9,64 +9,64 @@ export default function MarqueeSection() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-
-  // Smooth spring for scroll-scrub horizontal movement
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 30,
-    restDelta: 0.0001,
-  });
   
-  const x1 = useTransform(smoothProgress, [0, 1], ["0%", "-50%"]);
-  const x2 = useTransform(smoothProgress, [0, 1], ["-50%", "0%"]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["-20%", "10%"]);
 
-  const marqueeText = "CURATED EVENTS - ";
-  const repeatCount = 4;
+  const marqueeText = "CURATED EVENTS";
+  const repeatCount = 6;
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-black py-16 md:py-24 z-20"
+      className="relative w-full overflow-hidden bg-black py-20 md:py-32 z-20"
     >
-      {/* Top border line */}
-      <div className="absolute left-0 right-0 top-0 h-px bg-gray-800" />
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-linear-to-b from-transparent via-acm-blue/2 to-transparent pointer-events-none" />
 
-      {/* First Marquee Row - moves left on scroll */}
-      <div className="relative mb-4 overflow-hidden">
-        <motion.div style={{ x: x1 }} className="flex whitespace-nowrap">
+      {/* First Marquee Row - Outlined text */}
+      <div className="relative mb-2 overflow-hidden">
+        <motion.div 
+          style={{ x: x1 }} 
+          className="flex whitespace-nowrap items-center gap-8"
+        >
           {Array.from({ length: repeatCount }).map((_, i) => (
             <span
               key={`row1-${i}`}
-              className="text-[7.5vw] font-black leading-none tracking-tighter md:text-[6vw] text-white/80"
+              className="text-[8vw] md:text-[6vw] font-black leading-none tracking-tight"
               style={{
                 fontFamily: "var(--font-heading)",
+                WebkitTextStroke: "1px rgba(255, 255, 255, 0.15)",
+                color: "transparent",
               }}
             >
               {marqueeText}
+              <span className="mx-6 text-white/10">•</span>
             </span>
           ))}
         </motion.div>
       </div>
 
-      {/* Second Marquee Row - moves right on scroll (opposite direction) */}
+      {/* Second Marquee Row - Solid ACM Blue */}
       <div className="relative overflow-hidden">
-        <motion.div style={{ x: x2 }} className="flex whitespace-nowrap">
+        <motion.div 
+          style={{ x: x2 }} 
+          className="flex whitespace-nowrap items-center gap-12"
+        >
           {Array.from({ length: repeatCount }).map((_, i) => (
             <span
               key={`row2-${i}`}
-              className="text-[15vw] font-black leading-none tracking-tighter md:text-[12vw] text-acm-blue"
+              className="text-[14vw] md:text-[11vw] font-black leading-[0.85] tracking-tight text-acm-blue"
               style={{
                 fontFamily: "var(--font-heading)",
               }}
             >
               {marqueeText}
+              <span className="mx-8 text-acm-blue/30">—</span>
             </span>
           ))}
         </motion.div>
       </div>
-
-      {/* Bottom border line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gray-800" />
     </section>
   );
 }

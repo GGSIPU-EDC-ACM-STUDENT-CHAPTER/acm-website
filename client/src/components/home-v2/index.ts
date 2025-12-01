@@ -1,12 +1,8 @@
-export { default as HeaderV2 } from "./HeaderV2";
-export { default as HeroV2 } from "./HeroV2";
+// Core home-v2 components
 export { default as AboutSection } from "./AboutSection";
 export { default as MarqueeSection } from "./MarqueeSection";
 export { default as ProjectsSection } from "./ProjectsSection";
-export { default as ProcessSection } from "./ProcessSection";
-export { default as GallerySection } from "./GallerySection";
-export { default as ContactSection } from "./ContactSection";
-export { default as FooterSection } from "./FooterSection";
-export { default as SmoothScroll } from "./SmoothScroll";
-export { default as MarqueeColumnSection } from "./MarqueeColumnSection";
 export { default as ParallaxImageSection } from "./ParallaxImageSection";
+export { default as GallerySection } from "./MarqueeColumnSection";
+export { default as HorizontalScrollSection } from "./HorizontalScrollSection";
+export { default as StoryTransition } from "./StoryTransition";

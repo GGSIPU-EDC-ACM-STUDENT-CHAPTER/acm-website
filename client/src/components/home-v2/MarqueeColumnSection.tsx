@@ -107,7 +107,7 @@ const ImageCard = ({ src }: { src: string }) => (
     <img
         src={src}
         alt="Work showcase"
-        className="w-full h-auto object-cover rounded-lg shadow-xl shadow-black/50 opacity-80 hover:opacity-100 transition-all duration-500 border border-white/5"
+        className="w-full h-auto object-cover rounded-lg shadow-2xl shadow-black/60 opacity-70 hover:opacity-100 transition-all duration-700 ease-out border border-white/5 hover:scale-[1.02] hover:shadow-acm-blue/10"
     />
 );
 
@@ -134,29 +134,34 @@ export default function MarqueeColumnSection() {
     ];
 
     return (
-        // IMPORTANT: For scroll interactions to work, the page must be scrollable.
-        // I added min-h-[300vh] here just to simulate a long page so you can test the effect.
-        <div className="bg-[#0d0d0d] min-h-[300vh] relative z-10">
+        <div className="bg-black min-h-[300vh] relative z-10">
+            {/* Section Header */}
+            <div className="relative z-20 pt-32 pb-8 px-6 md:px-12 lg:px-20">
+                <div className="max-w-[1400px] mx-auto">
+                    <div className="flex items-center gap-6 mb-4">
+                        <div className="w-16 h-px bg-acm-blue/50" />
+                        <span className="text-[11px] font-light tracking-[0.5em] text-white/30 uppercase" style={{ fontFamily: "var(--font-body)" }}>
+                            Gallery
+                        </span>
+                    </div>
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+                        Captured Moments
+                    </h2>
+                </div>
+            </div>
 
-            <section className="relative w-full h-[100vh] overflow-hidden sticky top-0 py-12 z-0">
-                <div className="grid grid-cols-4 gap-4 mx-auto px-4 h-full">
-                    {/* Speed Controls:
-               Negative (-0.5) = Moves UP when you scroll down.
-               Positive (0.3)  = Moves DOWN when you scroll down.
-            */}
-                    <MarqueeColumn images={col1Images} speed={-0.5} />
-                    <MarqueeColumn images={col2Images} speed={0.3} className="-mt-24" />
-                    <MarqueeColumn images={col3Images} speed={-0.7} />
-                    <MarqueeColumn images={col1Images} speed={0.4} className="mt-12" />
+            <section className="sticky top-0 w-full h-screen overflow-hidden py-12 z-0">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mx-auto px-6 h-full">
+                    <MarqueeColumn images={col1Images} speed={-0.4} />
+                    <MarqueeColumn images={col2Images} speed={0.25} className="-mt-32" />
+                    <MarqueeColumn images={col3Images} speed={-0.5} className="hidden md:block" />
+                    <MarqueeColumn images={col1Images} speed={0.35} className="hidden md:block mt-16" />
                 </div>
 
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#0d0d0d] via-transparent to-[#0d0d0d]" />
+                <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-black via-transparent to-black" />
             </section>
 
-            {/* Dummy content to show that it works as you scroll past the section */}
-            <div className="h-[100vh] flex items-center justify-center text-white/20">
-                Scroll down to see the effect continue
-            </div>
+            <div className="h-screen" />
         </div>
     );
 }

@@ -1,251 +1,297 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  Brain,
-  Code,
-  Network,
-  PenTool,
-  Camera,
-  Film,
-  Palette,
-  LucideIcon,
-} from "lucide-react";
-import AnimatedText from "../AnimatedText";
 import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Linkedin, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  facultyMembers,
+  officeBearers,
+  technicalTeam,
+  creativeTeam,
+  TeamMember,
+} from "@/data/teamData";
+import { TextReveal } from "@/components/TextReveal";
 
-interface TeamProps {
-  number: string;
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
-
-const techTeams: TeamProps[] = [
-  {
-    number: "01",
-    icon: Brain,
-    title: "Machine Learning",
-    description:
-      "Exploring the frontiers of AI, from neural networks to predictive modeling.",
-  },
-  {
-    number: "02",
-    icon: Code,
-    title: "Web Development",
-    description:
-      "Building scalable, modern web applications with cutting-edge technologies.",
-  },
-  {
-    number: "03",
-    icon: Network,
-    title: "DSA & System Design",
-    description:
-      "Mastering algorithms and architecting robust, high-performance systems.",
-  },
-];
-
-const creativeTeams: TeamProps[] = [
-  {
-    number: "01",
-    icon: PenTool,
-    title: "Content & PR",
-    description:
-      "Crafting compelling narratives and managing our public presence.",
-  },
-  {
-    number: "02",
-    icon: Camera,
-    title: "Photo & Video",
-    description: "Capturing moments and telling stories through visual media.",
-  },
-  {
-    number: "03",
-    icon: Film,
-    title: "Video Editing",
-    description:
-      "Bringing visuals to life with professional post-production and effects.",
-  },
-  {
-    number: "04",
-    icon: Palette,
-    title: "Graphics & UI/UX",
-    description: "Designing intuitive interfaces and stunning visual assets.",
-  },
-];
-
-export default function Teams() {
-  const stackRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: stackRef,
-    offset: ["start start", "end end"],
-  });
-
-  const creativeY = useTransform(
-    scrollYProgress,
-    [0, 0.35, 0.6, 1],
-    [400, 140, 160, 160]
-  );
-  const creativeShadow = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0px 120px 160px rgba(0,0,0,0.35)", "0px 40px 90px rgba(0,0,0,0.55)"]
-  );
-  // const techScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
-  const techShadow = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0px 80px 120px rgba(0,0,0,0.35)", "0px 30px 60px rgba(0,0,0,0.6)"]
-  );
+/**
+ * Premium Member Card with corner accents
+ */
+function MemberCard({ member, index }: { member: TeamMember; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
   return (
-    <section className="w-full bg-black text-white py-24 px-6 md:px-12 lg:px-16 flex justify-center mb-[40vh]">
-      <div className="max-w-[1600px] w-full">
-        <div className="text-center mb-16">
-          <AnimatedText>
-            <p className="text-sm md:text-base uppercase tracking-[0.4em] text-gray-500 mb-4" style={{ fontFamily: "var(--font-body)" }}>
-              The Collective
-            </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
-              Teams that power the narrative
-            </h2>
-          </AnimatedText>
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      className="group relative"
+    >
+      {/* Card Container */}
+      <div className="relative bg-[#0a0a0f] border border-white/6 overflow-hidden transition-all duration-500 hover:border-white/12">
+        {/* Corner Accents */}
+        <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-acm-blue/60" />
+        <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-acm-blue/60" />
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-acm-blue/60" />
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-acm-blue/60" />
+
+        {/* Image Container */}
+        <div className="relative aspect-4/5 overflow-hidden bg-linear-to-br from-white/2 to-transparent">
+          {member.imageUrl ? (
+            <Image
+              src={member.imageUrl}
+              alt={member.name}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-6xl font-black text-white/3" style={{ fontFamily: "var(--font-heading)" }}>
+                {member.name.charAt(0)}
+              </div>
+            </div>
+          )}
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0f] via-transparent to-transparent opacity-80" />
         </div>
 
-        {/* Mobile simple layout */}
-        <div className="space-y-12 md:hidden">
-          <div className="rounded-4xl border border-white/5 bg-[#08080c] px-6 py-10">
-            <DomainSection
-              title="Technical Domains"
-              gridCols="grid-cols-1"
-              teams={techTeams}
-              centerHeading
-            />
-          </div>
-          <div className="rounded-4xl border border-white/5 bg-[#0b0b12] px-6 py-10">
-            <DomainSection
-              title="Creative Domains"
-              gridCols="grid-cols-1"
-              teams={creativeTeams}
-              centerHeading
-            />
-          </div>
-        </div>
-
-        {/* Desktop stacked layout */}
-        <div ref={stackRef} className="relative min-h-[230vh] hidden md:block">
-          <motion.div
-            style={{ boxShadow: techShadow }}
-            className="sticky top-8 z-20 rounded-4xl border border-white/5 bg-[#08080c] px-10 md:px-14 py-12 md:py-16"
+        {/* Content */}
+        <div className="relative p-5 -mt-12">
+          <h3
+            className="text-xl md:text-2xl font-black text-white mb-1 tracking-tight"
+            style={{ fontFamily: "var(--font-heading)" }}
           >
-            <DomainSection
-              title="Technical Domains"
-              gridCols="grid-cols-1 md:grid-cols-3"
-              teams={techTeams}
-            />
-          </motion.div>
-
-          <motion.div
-            style={{ y: creativeY, boxShadow: creativeShadow }}
-            className="sticky top-8 z-30 mt-16 rounded-4xl border border-white/5 bg-[#08080c] px-10 md:px-14 py-12 md:py-16"
+            {member.name}
+          </h3>
+          <p
+            className="text-white/40 text-sm tracking-wide"
+            style={{ fontFamily: "var(--font-body)" }}
           >
-            <DomainSection
-              title="Creative Domains"
-              gridCols="grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-              teams={creativeTeams}
-            />
-          </motion.div>
+            {member.role}
+          </p>
+
+          {/* LinkedIn */}
+          {member.linkedin && (
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-5 right-5 w-8 h-8 flex items-center justify-center bg-white/5 border border-white/10 text-white/40 hover:text-acm-blue hover:border-acm-blue/40 transition-all duration-300"
+            >
+              <Linkedin size={14} />
+            </a>
+          )}
         </div>
+
+        {/* Decorative Line */}
+        <div className="absolute bottom-0 left-5 right-5 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
       </div>
-    </section>
+    </motion.div>
   );
 }
 
-function DomainSection({
+/**
+ * Section Header Component
+ */
+function SectionHeader({
+  label,
   title,
-  teams,
-  gridCols,
-  centerHeading = false,
+  index,
 }: {
+  label: string;
   title: string;
-  teams: TeamProps[];
-  gridCols: string;
-  centerHeading?: boolean;
+  index: string;
 }) {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(headerRef, { once: true, margin: "-50px" });
+
   return (
-    <div>
-      <AnimatedText className="mb-12">
-        <h2
-          className={`text-4xl md:text-6xl font-black tracking-tight text-white mb-6 ${
-            centerHeading ? "text-center" : ""
-          }`}
+    <motion.div
+      ref={headerRef}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      className="flex items-end justify-between mb-12"
+    >
+      <div>
+        <div className="flex items-center gap-4 mb-3">
+          <span
+            className="text-acm-blue text-xs font-medium tracking-[0.3em]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {index}
+          </span>
+          <div className="w-8 h-px bg-white/20" />
+          <span
+            className="text-[10px] tracking-[0.4em] text-white/30 uppercase"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {label}
+          </span>
+        </div>
+        <h3
+          className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {title}
-        </h2>
-        <div
-          className={`h-0.5 w-24 bg-acm-blue rounded-full ${
-            centerHeading ? "mx-auto" : "md:mx-0"
-          }`}
-        />
-      </AnimatedText>
-
-      <div className={`grid ${gridCols} gap-x-10 gap-y-12 pt-6`}>
-        {teams.map((team, index) => (
-          <TeamCard key={team.title} {...team} delay={index * 0.12} />
-        ))}
+        </h3>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-function TeamCard({
-  number,
-  icon: Icon,
-  title,
-  description,
-  delay,
-}: TeamProps & { delay: number }) {
+/**
+ * Main Teams Section
+ */
+export default function Teams() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex flex-col"
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-[#050508] overflow-hidden py-32"
+      style={{ zIndex: 10 }}
     >
-      {/* Top Section: Number and Icon */}
-      <div className="relative mb-6">
-        {/* Large Background Number - Clipped to show top half */}
-        <div className="relative h-24 overflow-hidden select-none pointer-events-none">
-          <span className="absolute -top-2 left-0 text-[8rem] leading-none font-display font-bold text-[#1a1a1a] transition-colors duration-500 group-hover:text-[#222]">
-            {number}
-          </span>
-        </div>
-        <div className="-translate-y-7 bg-[#08080c]">
-          {/* Divider Line */}
-          <div className="w-full h-px bg-linear-to-r from-gray-800 via-gray-500 to-gray-800 mb-8 group-hover:bg-gray-700 transition-colors duration-500" />
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+          className="absolute inset-0"
+        />
+      </div>
 
-          {/* Icon */}
-          <div className="mt-4 mb-6">
-            <Icon
-              size={28}
-              strokeWidth={1.5}
-              className="text-white group-hover:text-acm-blue transition-colors duration-300"
+      <div className="relative z-10 px-6 md:px-12 lg:px-20">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Main Section Header */}
+          <motion.div
+            ref={headerRef}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mb-24"
+          >
+            <div className="flex items-center gap-6 mb-6">
+              <div className="w-16 h-px bg-linear-to-r from-acm-blue/60 to-transparent" />
+              <span
+                className="text-[11px] font-light tracking-[0.5em] text-white/40 uppercase"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                The People
+              </span>
+            </div>
+            <h2
+              className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              <TextReveal text="Our Team" delay={0.1} />
+            </h2>
+            <p
+              className="mt-6 text-white/40 text-base md:text-lg max-w-xl leading-relaxed"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              Meet the passionate individuals driving innovation and building
+              our community.
+            </p>
+          </motion.div>
+
+          {/* Faculty Section */}
+          <div className="mb-24">
+            <SectionHeader
+              index="01"
+              label="Mentors"
+              title="Faculty Advisors"
             />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {facultyMembers.map((member, index) => (
+                <MemberCard key={member.name} member={member} index={index} />
+              ))}
+            </div>
           </div>
+
+          {/* Office Bearers Section */}
+          <div className="mb-24">
+            <SectionHeader
+              index="02"
+              label="Leadership"
+              title="Office Bearers"
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {officeBearers.map((member, index) => (
+                <MemberCard key={member.name} member={member} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* Technical Domain Section */}
+          <div className="mb-24">
+            <SectionHeader
+              index="03"
+              label="Engineers"
+              title="Technical Domain"
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {technicalTeam.map((member, index) => (
+                <MemberCard key={member.name} member={member} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* Creative Domain Section */}
+          <div className="mb-24">
+            <SectionHeader
+              index="04"
+              label="Creatives"
+              title="Creative Domain"
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {creativeTeam.map((member, index) => (
+                <MemberCard key={member.name} member={member} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* View All CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            className="flex justify-center pt-8"
+          >
+            <Link
+              href="/teams"
+              className="group inline-flex items-center gap-4 px-8 py-4 bg-white/3 border border-white/10 hover:border-acm-blue/40 hover:bg-acm-blue/5 transition-all duration-500"
+            >
+              <span
+                className="text-sm font-medium text-white/70 group-hover:text-white tracking-wide transition-colors duration-300"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                View All Team Members
+              </span>
+              <ArrowRight
+                size={16}
+                className="text-white/40 group-hover:text-acm-blue group-hover:translate-x-1 transition-all duration-300"
+              />
+            </Link>
+          </motion.div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="space-y-10">
-        <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-wide group-hover:translate-x-1 transition-transform duration-300" style={{ fontFamily: "var(--font-heading)" }}>
-          {title}
-        </h3>
-        <p className="text-transparent bg-clip-text bg-linear-to-r from-gray-600 via-gray-500 to-gray-600 leading-tight text-xl md:text-2xl font-normal max-w-sm group-hover:text-gray-500 transition-colors" style={{ fontFamily: "var(--font-body)" }}>
-          {description}
-        </p>
-      </div>
-    </motion.div>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black to-transparent pointer-events-none" />
+    </section>
   );
 }
