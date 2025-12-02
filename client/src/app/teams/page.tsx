@@ -1,15 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import TeamsHero from "@/components/teams/TeamsHero";
 import TeamSection from "@/components/teams/TeamSection";
 import CinematicScroll from "@/components/teams/CinematicScroll";
 import TeamsClosing from "@/components/teams/TeamsClosing";
-import {
-  facultyMembers,
-  officeBearers,
-  technicalTeam,
-  creativeTeam,
-} from "@/data/teamData";
+import YearFilter from "@/components/teams/YearFilter";
+import { teamDataByYear, type TeamYear } from "@/data/teamData";
 import { 
   Brain, 
   Code, 
@@ -108,6 +105,12 @@ const leadershipFocusAreas = [
 ];
 
 export default function TeamsPage() {
+  const [selectedYear, setSelectedYear] = useState<TeamYear>("2025-26");
+  
+  // Get team data for selected year
+  const currentTeamData = teamDataByYear[selectedYear];
+  const { faculty, officeBearers, technical, creative } = currentTeamData;
+
   return (
     <main className="min-h-screen bg-[#030303] text-white">
       {/* Cinematic Scroll Indicator */}
@@ -116,6 +119,12 @@ export default function TeamsPage() {
       {/* Hero Section */}
       <TeamsHero />
 
+      {/* Year Filter */}
+      <YearFilter 
+        selectedYear={selectedYear} 
+        onYearChange={setSelectedYear} 
+      />
+
       {/* Content Sections */}
       <div className="relative">
         {/* Faculty Coordinators */}
@@ -123,7 +132,7 @@ export default function TeamsPage() {
           title="Faculty Coordinators"
           subtitle="The Mentors"
           description="Distinguished faculty members who guide and support our chapter's vision, research initiatives, and academic excellence."
-          members={facultyMembers}
+          members={faculty}
           sectionNumber="01"
           focusAreas={facultyFocusAreas}
         />
@@ -138,25 +147,29 @@ export default function TeamsPage() {
           focusAreas={leadershipFocusAreas}
         />
 
-        {/* Technical Team */}
-        <TeamSection
-          title="Technical Domain"
-          subtitle="The Engineers"
-          description="Experts in development, data science, and emerging technologies building innovative solutions that push boundaries."
-          members={technicalTeam}
-          sectionNumber="03"
-          focusAreas={technicalFocusAreas}
-        />
+        {/* Technical Team - only show if has members */}
+        {technical.length > 0 && (
+          <TeamSection
+            title="Technical Domain"
+            subtitle="The Engineers"
+            description="Experts in development, data science, and emerging technologies building innovative solutions that push boundaries."
+            members={technical}
+            sectionNumber="03"
+            focusAreas={technicalFocusAreas}
+          />
+        )}
 
-        {/* Creative Team */}
-        <TeamSection
-          title="Creative Domain"
-          subtitle="The Artisans"
-          description="Creative minds shaping our visual identity, content strategy, and community engagement through artistic excellence."
-          members={creativeTeam}
-          sectionNumber="04"
-          focusAreas={creativeFocusAreas}
-        />
+        {/* Creative Team - only show if has members */}
+        {creative.length > 0 && (
+          <TeamSection
+            title="Creative Domain"
+            subtitle="The Artisans"
+            description="Creative minds shaping our visual identity, content strategy, and community engagement through artistic excellence."
+            members={creative}
+            sectionNumber="04"
+            focusAreas={creativeFocusAreas}
+          />
+        )}
 
         {/* Closing Section */}
         <TeamsClosing />

@@ -2,9 +2,9 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Mail, PenTool, BookOpen, Users, Home } from "lucide-react";
+import { ArrowRight, Mail, Calendar, Users, Home } from "lucide-react";
 
-export default function BlogsClosing() {
+export default function EventsClosing() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
@@ -17,7 +17,7 @@ export default function BlogsClosing() {
       <div className="absolute inset-0 pointer-events-none">
         {/* Gradient orbs */}
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-acm-blue/[0.05] rounded-full blur-[200px]" />
-        <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-purple-900/[0.03] rounded-full blur-[180px]" />
+        <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-acm-blue/[0.03] rounded-full blur-[180px]" />
         
         {/* Grid pattern */}
         <div
@@ -49,7 +49,7 @@ export default function BlogsClosing() {
               className="text-[10px] md:text-[11px] tracking-[0.5em] text-acm-blue uppercase"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              Join the Narrative
+              Be Part of the Journey
             </span>
             <div className="w-12 md:w-16 h-px bg-linear-to-l from-transparent to-acm-blue/40" />
           </motion.div>
@@ -62,7 +62,7 @@ export default function BlogsClosing() {
             className="text-4xl md:text-6xl lg:text-7xl font-black tracking-normal leading-[0.95] mb-6"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            <span className="text-white">HAVE A STORY TO</span>
+            <span className="text-white">DON&apos;T JUST WATCH.</span>
             <br />
             <span 
               style={{
@@ -72,7 +72,7 @@ export default function BlogsClosing() {
                 backgroundClip: "text",
               }}
             >
-              SHARE?
+              PARTICIPATE.
             </span>
           </motion.h2>
 
@@ -92,9 +92,8 @@ export default function BlogsClosing() {
             className="text-base md:text-lg text-white/40 max-w-2xl leading-relaxed mb-12"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            We&apos;re always looking for fresh perspectives and compelling voices. 
-            Whether it&apos;s a technical deep-dive, a project showcase, or insights 
-            from your journey—we want to hear from you.
+            Join GGSIPU EDC ACM Student Chapter and be part of events that shape futures. 
+            From hackathons to workshops, every event is an opportunity to learn, connect, and grow.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -106,16 +105,16 @@ export default function BlogsClosing() {
           >
             {/* Primary CTA */}
             <a
-              href="mailto:usaracm@ipu.ac.in?subject=Blog Submission"
+              href="mailto:usaracm@ipu.ac.in?subject=Event Inquiry"
               className="group relative px-8 py-4 bg-acm-blue/20 border border-acm-blue/40 hover:bg-acm-blue/30 hover:border-acm-blue/60 transition-all duration-300"
             >
               <span className="relative z-10 flex items-center justify-center gap-3">
-                <PenTool size={18} className="text-acm-blue" />
+                <Mail size={18} className="text-acm-blue" />
                 <span 
                   className="text-sm font-medium text-white tracking-wide"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
-                  Submit Your Story
+                  Get Event Updates
                 </span>
                 <ArrowRight size={16} className="text-acm-blue group-hover:translate-x-1 transition-transform duration-300" />
               </span>
@@ -150,9 +149,9 @@ export default function BlogsClosing() {
             className="flex items-center gap-8 md:gap-16 pt-8 border-t border-white/5"
           >
             {[
-              { icon: BookOpen, value: "6", label: "Stories" },
-              { icon: Users, value: "6", label: "Authors" },
-              { icon: Mail, value: "500+", label: "Readers" },
+              { icon: Calendar, value: "11", label: "Events" },
+              { icon: Users, value: "1000+", label: "Participants" },
+              { icon: Calendar, value: "6", label: "Categories" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}

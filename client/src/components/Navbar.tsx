@@ -6,9 +6,9 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   { label: "About", number: "1.0", href: "/about" },
-  { label: "Projects", number: "2.0", href: "/projects" },
-  { label: "Events", number: "3.0", href: "#" },
-  { label: "Team", number: "4.0", href: "/teams" },
+  { label: "Events", number: "2.0", href: "/events" },
+  { label: "Team", number: "3.0", href: "/teams" },
+  { label: "Projects", number: "4.0", href: "/projects" },
   { label: "Blogs", number: "5.0", href: "/blogs" },
 ];
 

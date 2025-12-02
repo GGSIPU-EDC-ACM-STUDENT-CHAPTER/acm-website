@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-export default function BlogsHero() {
+export default function EventsHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -31,9 +31,8 @@ export default function BlogsHero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Letters for the main title with staggered animation
   const titleWord1 = "THE";
-  const titleWord2 = "CHRONICLE";
+  const titleWord2 = "EVENTS";
 
   return (
     <section
@@ -134,7 +133,7 @@ export default function BlogsHero() {
               className="text-[10px] md:text-[11px] tracking-[0.5em] text-white/30 uppercase"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              Stories & Insights
+              Experiences & Workshops
             </span>
             <motion.div 
               className="w-16 md:w-24 h-px bg-linear-to-l from-transparent to-acm-blue/40"
@@ -166,7 +165,7 @@ export default function BlogsHero() {
             </motion.div>
           </div>
 
-          {/* Main title - CHRONICLE */}
+          {/* Main title - EVENTS */}
           <div className="overflow-hidden">
             <motion.div className="flex">
               {titleWord2.split("").map((letter, i) => (
@@ -202,7 +201,7 @@ export default function BlogsHero() {
             className="mt-8 md:mt-12 max-w-xl text-center text-base md:text-lg text-white/40 leading-relaxed"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Where ideas take form and stories unfold. Explore narratives from the minds shaping tomorrow&apos;s technology.
+            Where innovation meets inspiration. Explore our journey through hackathons, workshops, and transformative experiences.
           </motion.p>
 
           {/* Stats row */}
@@ -213,9 +212,9 @@ export default function BlogsHero() {
             className="mt-12 md:mt-16 flex items-center gap-8 md:gap-16"
           >
             {[
-              { value: "6", label: "Articles" },
+              { value: "11", label: "Events" },
+              { value: "1000+", label: "Participants" },
               { value: "6", label: "Categories" },
-              { value: "500+", label: "Readers" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
