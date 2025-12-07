@@ -1,41 +1,207 @@
 export interface TeamMember {
   name: string;
   role: string;
-  category: 'faculty-coordinator' | 'office-bearer' | 'creative-head' | 'team-lead' | 'creative-lead';
+  category: 'faculty' | 'office-bearer' | 'technical' | 'creative';
   imageUrl?: string;
+  linkedin?: string;
 }
 
-export const facultyCoordinators: TeamMember[] = [
-  { name: 'Prof. Arvinder Kaur', role: 'Faculty Coordinator', category: 'faculty-coordinator' },
-  { name: 'Dr. Rahul Johari', role: 'Faculty Sponsor', category: 'faculty-coordinator' },
+// ==========================================
+// 2025-26 TEAM (Current)
+// ==========================================
+
+export const facultyMembers: TeamMember[] = [
+  { 
+    name: 'Prof. Arvinder Kaur', 
+    role: 'Faculty Coordinator', 
+    category: 'faculty',
+    imageUrl: '/ARVINDER KAUR.png',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Dr. Rahul Johari', 
+    role: 'Faculty Sponsor', 
+    category: 'faculty',
+    imageUrl: '/DR RAHUL JOHARI.jpg',
+    linkedin: 'https://linkedin.com'
+  },
 ];
 
-export const officeBearer: TeamMember[] = [
-  { name: 'Shivam', role: 'Chair', category: 'office-bearer' },
-  { name: 'Sheelendra', role: 'Vice Chair', category: 'office-bearer' },
-  { name: 'Arsh Ahmad', role: 'Secretary', category: 'office-bearer' },
-  { name: 'Abhijith KS', role: 'Web Master', category: 'office-bearer' },
-  { name: 'Prabhakar', role: 'Treasurer', category: 'office-bearer' },
-  { name: 'Aniket Kumar', role: 'Membership Chair', category: 'office-bearer' },
+export const officeBearers: TeamMember[] = [
+  { 
+    name: 'Shivam', 
+    role: 'Chair', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Sheelendra', 
+    role: 'Vice Chair', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Arsh Ahmad', 
+    role: 'Secretary', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Prabhakar', 
+    role: 'Treasurer', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Aniket Kumar', 
+    role: 'Membership Chair', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Abhijith KS', 
+    role: 'Web Master', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
 ];
 
-export const acmCreatives: TeamMember[] = [
-  { name: 'To be filled', role: 'Head', category: 'creative-head' },
-  { name: 'TBF', role: 'Co-Head', category: 'creative-head' },
+export const technicalTeam: TeamMember[] = [
+  { 
+    name: 'Shantanu Ojha', 
+    role: 'ML Captain', 
+    category: 'technical',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Ritwik Mittal', 
+    role: 'DSA Captain', 
+    category: 'technical',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'To Be Announced', 
+    role: 'Web Captain', 
+    category: 'technical',
+  },
+  { 
+    name: 'To Be Announced', 
+    role: 'Operations Lead', 
+    category: 'technical',
+  },
 ];
 
-export const teamLeads: TeamMember[] = [
-  { name: 'Shantanu Ojha', role: 'ML Captain', category: 'team-lead' },
-  { name: 'Ritwik Mittal', role: 'DSA Captain', category: 'team-lead' },
-  { name: 'TBF', role: 'Web Captain', category: 'team-lead' },
-  { name: 'TBF', role: 'Operations', category: 'team-lead' },
+export const creativeTeam: TeamMember[] = [
+  { 
+    name: 'Utkarsh Yadav', 
+    role: 'Design Captain', 
+    category: 'creative',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Shanvi Gulia', 
+    role: 'Content Captain', 
+    category: 'creative',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'To Be Announced', 
+    role: 'UI/UX Captain', 
+    category: 'creative',
+  },
+  { 
+    name: 'To Be Announced', 
+    role: 'Video & Photography', 
+    category: 'creative',
+  },
+  { 
+    name: 'To Be Announced', 
+    role: 'Marketing & PR', 
+    category: 'creative',
+  },
 ];
 
-export const creativeLeads: TeamMember[] = [
-  { name: 'Utkarsh Yadav', role: 'Design Captain', category: 'creative-lead' },
-  { name: 'TBF', role: 'UI/UX Captain', category: 'creative-lead' },
-  { name: 'TBF', role: 'Video and Photography Captain', category: 'creative-lead' },
-  { name: 'TBF', role: 'Video Editing Captain', category: 'creative-lead' },
-  { name: 'Shanvi Gulia', role: 'Content Captain', category: 'creative-lead' },
-  { name: 'TBF', role: 'Marketing and PR Captain', category: 'creative-lead' },
+// ==========================================
+// 2024-25 TEAM (Past/Founding Team)
+// ==========================================
+
+export const facultyMembers2024: TeamMember[] = [
+  { 
+    name: 'Prof. Arvinder Kaur', 
+    role: 'Faculty Coordinator', 
+    category: 'faculty',
+    imageUrl: '/ARVINDER KAUR.png',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Dr. Rahul Johari', 
+    role: 'Faculty Sponsor', 
+    category: 'faculty',
+    imageUrl: '/DR RAHUL JOHARI.jpg',
+    linkedin: 'https://linkedin.com'
+  },
 ];
+
+export const officeBearers2024: TeamMember[] = [
+  { 
+    name: 'Aditya Kumar', 
+    role: 'Chair', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Durga Sharma', 
+    role: 'Vice Chair', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Chirag Khanna', 
+    role: 'Secretary', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Ushnik Nath', 
+    role: 'Treasurer', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Sheelendra', 
+    role: 'Membership Chair', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+  { 
+    name: 'Shivam', 
+    role: 'Web Master', 
+    category: 'office-bearer',
+    linkedin: 'https://linkedin.com'
+  },
+];
+
+export const technicalTeam2024: TeamMember[] = [];
+
+export const creativeTeam2024: TeamMember[] = [];
+
+// ==========================================
+// TEAM DATA BY YEAR
+// ==========================================
+
+export type TeamYear = '2024-25' | '2025-26';
+
+export const teamDataByYear = {
+  '2024-25': {
+    faculty: facultyMembers2024,
+    officeBearers: officeBearers2024,
+    technical: technicalTeam2024,
+    creative: creativeTeam2024,
+  },
+  '2025-26': {
+    faculty: facultyMembers,
+    officeBearers: officeBearers,
+    technical: technicalTeam,
+    creative: creativeTeam,
+  },
+};

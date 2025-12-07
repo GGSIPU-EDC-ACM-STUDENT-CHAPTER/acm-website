@@ -6,11 +6,16 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   { label: "About", number: "1.0", href: "/about" },
-  { label: "Projects", number: "2.0", href: "/projects" },
-  { label: "Events", number: "3.0", href: "#" },
-  { label: "Team", number: "4.0", href: "/teams" },
-  { label: "Clubs", number: "5.0", href: "#" },
-  { label: "Blogs", number: "6.0", href: "/blogs" },
+  { label: "Events", number: "2.0", href: "/events" },
+  { label: "Team", number: "3.0", href: "/teams" },
+  { label: "Projects", number: "4.0", href: "/projects" },
+  { label: "Blogs", number: "5.0", href: "/blogs" },
+];
+
+// Mobile nav includes Home
+const MOBILE_NAV_ITEMS = [
+  { label: "Home", number: "0.0", href: "/" },
+  ...NAV_ITEMS,
 ];
 
 export default function Navbar() {
@@ -26,7 +31,8 @@ export default function Navbar() {
   const isHomeActive = isActive("/");
 
   return (
-    <nav className="fixed top-4 left-1/2 z-50 w-full max-w-[1200px] -translate-x-1/2 px-4">
+    <div className="sticky top-0 z-[100] w-full flex justify-center pt-4 px-4">
+      <nav className="w-full max-w-[1200px]">
       {/* Desktop */}
       <div className="hidden w-full overflow-hidden rounded-2xl border border-white/10 bg-[#181818]/45 text-white shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-md md:flex">
         <div
@@ -92,22 +98,23 @@ export default function Navbar() {
             />
           </div>
           <button
-            className="rounded-xl border border-white/20 p-2"
+            className="rounded-xl border border-white/20 p-3"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label="Toggle navigation"
           >
-            <span className="block h-0.5 w-5 bg-white" />
-            <span className="mt-1 block h-0.5 w-5 bg-white" />
-            <span className="mt-1 block h-0.5 w-5 bg-white" />
+            <span className="block h-0.5 w-6 bg-white" />
+            <span className="mt-1.5 block h-0.5 w-6 bg-white" />
+            <span className="mt-1.5 block h-0.5 w-6 bg-white" />
           </button>
         </div>
         {mobileOpen && (
-          <div className="border-t border-white/10 px-4 py-3">
-            <ul className="space-y-3 text-sm uppercase tracking-[0.25em]">
-              {NAV_ITEMS.map((item) => (
+          <div className="border-t border-white/10 px-4 py-4">
+            <ul className="space-y-4 text-sm uppercase tracking-[0.25em]">
+              {MOBILE_NAV_ITEMS.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
+                    onClick={() => setMobileOpen(false)}
                     className={`flex items-center justify-between transition-colors ${
                       isActive(item.href)
                         ? "text-white"
@@ -124,5 +131,6 @@ export default function Navbar() {
         )}
       </div>
     </nav>
+    </div>
   );
 }

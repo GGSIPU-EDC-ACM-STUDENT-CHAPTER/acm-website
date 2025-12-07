@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { type BlogPost } from "@/data/blogsData";
+import { ArrowUpRight, Clock } from "lucide-react";
 
 interface BlogsFeaturedProps {
   posts: BlogPost[];
@@ -15,69 +16,228 @@ export default function BlogsFeatured({
   onPostClick,
 }: BlogsFeaturedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
 
   const featuredPosts = posts.filter((p) => p.featured).slice(0, 3);
+  const mainPost = featuredPosts[0];
+  const secondaryPosts = featuredPosts.slice(1, 3);
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-black py-32"
+      className="relative bg-[#030303] py-32 md:py-40 overflow-hidden"
     >
-      {/* Ambient background */}
-      <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-1/4 h-[600px] w-[600px] rounded-full bg-acm-blue/5 blur-[180px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-acm-blue/3 blur-[150px]" />
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-acm-blue/[0.03] rounded-full blur-[200px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-900/[0.02] rounded-full blur-[180px]" />
+        
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.015]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
       </div>
 
-      {/* Section header */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        {/* Section Header */}
         <motion.div
+          ref={headerRef}
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-16 md:mb-24"
         >
-          <div className="mb-6 flex items-center gap-4">
-            <div className="h-px w-16 bg-acm-blue/50" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.5em] text-acm-blue">
+          <div className="flex items-center gap-4 mb-6">
+            <span 
+              className="text-[10px] md:text-[11px] font-medium tracking-[0.3em] text-acm-blue uppercase"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              01
+            </span>
+            <div className="w-12 md:w-20 h-px bg-acm-blue/40" />
+            <span 
+              className="text-[10px] md:text-[11px] font-light tracking-[0.4em] text-white/30 uppercase"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
               Featured Stories
             </span>
           </div>
-          <h2 className="font-display text-4xl font-bold md:text-6xl lg:text-7xl">
-            <span className="text-white">Tales that</span>
-            <br />
-            <span className="bg-linear-to-r from-white/40 to-white/20 bg-clip-text text-transparent">
-              Inspire
-            </span>
+          
+          <h2
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-[0.95]"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            TALES THAT <span className="text-acm-blue">INSPIRE</span>
           </h2>
         </motion.div>
 
-        {/* Featured posts layout */}
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Main featured post */}
-          {featuredPosts[0] && (
-            <FeaturedCard
-              post={featuredPosts[0]}
-              isMain
-              scrollProgress={scrollYProgress}
-              onClick={() => onPostClick?.(featuredPosts[0])}
-            />
+        {/* Featured Grid */}
+        <div className="grid lg:grid-cols-12 gap-6 md:gap-8">
+          {/* Main Featured Post - Large Card */}
+          {mainPost && (
+            <motion.article
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => onPostClick?.(mainPost)}
+              className="lg:col-span-7 group cursor-pointer"
+            >
+              <div className="relative h-full bg-[#0a0a0a] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/20">
+                {/* Corner Accents */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
+                <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
+                <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
+
+                {/* Image Section */}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(0,133,202,0.15) 0%, rgba(10,10,20,1) 60%, rgba(0,0,0,1) 100%)",
+                    }}
+                  />
+                  
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-black/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-6 left-6 z-10">
+                    <span 
+                      className="px-4 py-2 bg-acm-blue/20 backdrop-blur-md border border-acm-blue/30 text-[10px] tracking-[0.2em] text-acm-blue uppercase"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      {mainPost.category}
+                    </span>
+                  </div>
+
+                  {/* Featured Badge */}
+                  <div className="absolute top-6 right-6 z-10">
+                    <span 
+                      className="px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 text-[9px] tracking-[0.15em] text-white/60 uppercase"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      Featured
+                    </span>
+                  </div>
+
+                  {/* Scan line effect */}
+                  <motion.div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
+                    style={{
+                      background: "linear-gradient(180deg, transparent 0%, rgba(0, 133, 202, 0.03) 50%, transparent 100%)",
+                      backgroundSize: "100% 200%",
+                    }}
+                    animate={{
+                      backgroundPosition: ["0% 0%", "0% 100%"],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6 md:p-8">
+                  {/* Title */}
+                  <h3 
+                    className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 group-hover:text-acm-blue transition-colors duration-300 tracking-normal"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {mainPost.title}
+                  </h3>
+                  
+                  {/* Subtitle */}
+                  <p 
+                    className="text-white/50 text-base md:text-lg mb-4"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {mainPost.subtitle}
+                  </p>
+                  
+                  {/* Excerpt */}
+                  <p 
+                    className="text-white/30 text-sm md:text-base leading-relaxed mb-6 line-clamp-2"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {mainPost.excerpt}
+                  </p>
+
+                  {/* Meta Row */}
+                  <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                    <div className="flex items-center gap-4">
+                      {/* Author */}
+                    <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-linear-to-br from-acm-blue/40 to-acm-blue/10 border border-white/10 flex items-center justify-center">
+                          <span className="text-[10px] font-bold text-acm-blue">
+                            {mainPost.author.name.split(' ').map(n => n[0]).join('')}
+                          </span>
+                        </div>
+                        <div>
+                          <span 
+                            className="block text-sm text-white/70"
+                            style={{ fontFamily: "var(--font-body)" }}
+                          >
+                            {mainPost.author.name}
+                          </span>
+                          <span 
+                            className="text-[10px] text-acm-blue/70 uppercase tracking-wider"
+                            style={{ fontFamily: "var(--font-body)" }}
+                          >
+                            {mainPost.author.team}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="w-px h-8 bg-white/10" />
+                      
+                      {/* Read Time */}
+                      <div className="flex items-center gap-2 text-white/30">
+                        <Clock size={14} />
+                        <span 
+                          className="text-xs"
+                          style={{ fontFamily: "var(--font-body)" }}
+                        >
+                          {mainPost.readTime}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Read More */}
+                    <div className="flex items-center gap-2 text-white/40 group-hover:text-acm-blue transition-colors duration-300">
+                      <span 
+                        className="text-xs uppercase tracking-wider"
+                        style={{ fontFamily: "var(--font-body)" }}
+                      >
+                        Read Story
+                      </span>
+                      <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hover glow */}
+                <div className="absolute -inset-px bg-linear-to-br from-acm-blue/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              </div>
+            </motion.article>
           )}
 
-          {/* Secondary featured posts */}
-          <div className="flex flex-col gap-8">
-            {featuredPosts.slice(1, 3).map((post, index) => (
-              <FeaturedCard
-                key={post.id}
-                post={post}
-                isMain={false}
+          {/* Secondary Posts - Stacked */}
+          <div className="lg:col-span-5 flex flex-col gap-6 md:gap-8">
+            {secondaryPosts.map((post, index) => (
+              <SecondaryCard 
+                key={post.id} 
+                post={post} 
                 index={index}
-                scrollProgress={scrollYProgress}
                 onClick={() => onPostClick?.(post)}
               />
             ))}
@@ -88,163 +248,112 @@ export default function BlogsFeatured({
   );
 }
 
-function FeaturedCard({
-  post,
-  isMain,
-  index = 0,
-  scrollProgress,
-  onClick,
-}: {
-  post: BlogPost;
-  isMain: boolean;
-  index?: number;
-  scrollProgress: ReturnType<
-    typeof useTransform<number, number>
-  > extends infer T
-    ? T
-    : never;
+function SecondaryCard({ 
+  post, 
+  index,
+  onClick 
+}: { 
+  post: BlogPost; 
+  index: number;
   onClick?: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
 
   return (
     <motion.article
       ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.8, delay: isMain ? 0 : 0.2 + index * 0.15 }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
       onClick={onClick}
-      className={`group relative cursor-pointer overflow-hidden rounded-3xl border border-white/5 bg-white/2 backdrop-blur-sm transition-all duration-700 hover:border-acm-blue/30 ${
-        isMain ? "lg:row-span-2" : ""
-      }`}
+      className="group cursor-pointer flex-1"
     >
-      {/* Image section */}
-      <div
-        className={`relative overflow-hidden ${
-          isMain ? "aspect-4/3 lg:aspect-auto lg:h-full" : "aspect-video"
-        }`}
-      >
-        {/* Placeholder gradient for missing images */}
-        <div
-          className="absolute inset-0 bg-linear-to-br from-acm-blue/20 via-gray-900 to-black"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(0,133,202,0.15) 0%, rgba(10,10,15,1) 50%, rgba(0,0,0,1) 100%)`,
-          }}
-        />
+      <div className="relative h-full bg-[#0a0a0a] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/20">
+        {/* Corner Accents */}
+        <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
+        <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
 
-        {/* Animated overlay on hover */}
-        <motion.div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40" />
+        <div className="flex flex-col sm:flex-row h-full">
+          {/* Image */}
+          <div className="relative w-full sm:w-2/5 aspect-video sm:aspect-auto overflow-hidden">
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(135deg, rgba(0,133,202,${0.1 + index * 0.05}) 0%, rgba(10,10,20,1) 60%, rgba(0,0,0,1) 100%)`,
+              }}
+            />
+            <div className="absolute inset-0 bg-linear-to-r from-transparent to-[#0a0a0a] opacity-60" />
+            
+            {/* Category */}
+            <div className="absolute top-4 left-4 z-10">
+              <span 
+                className="px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-white/10 text-[9px] tracking-[0.15em] text-white/60 uppercase"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {post.category}
+              </span>
+            </div>
+          </div>
 
-        {/* Cinematic bars */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-linear-to-b from-black/80 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-black/80 to-transparent" />
-
-        {/* Content overlay */}
-        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-          {/* Category badge */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-4"
-          >
-            <span className="inline-block rounded-full border border-acm-blue/30 bg-acm-blue/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-acm-blue backdrop-blur-sm">
-              {post.category}
-            </span>
-          </motion.div>
-
-          {/* Title */}
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className={`font-display font-bold leading-tight text-white transition-colors duration-300 group-hover:text-acm-blue ${
-              isMain
-                ? "text-2xl md:text-4xl lg:text-5xl"
-                : "text-xl md:text-2xl"
-            }`}
-          >
-            {post.title}
-          </motion.h3>
-
-          {/* Subtitle - only on main */}
-          {isMain && (
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-2 text-lg text-white/50"
+          {/* Content */}
+          <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
+            <h3 
+              className="text-lg md:text-xl font-black text-white mb-2 group-hover:text-acm-blue transition-colors duration-300 tracking-normal line-clamp-2"
+              style={{ fontFamily: "var(--font-heading)" }}
             >
-              {post.subtitle}
-            </motion.p>
-          )}
+              {post.title}
+            </h3>
+            
+            <p 
+              className="text-white/30 text-sm mb-4 line-clamp-2"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {post.excerpt}
+            </p>
 
-          {/* Excerpt */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className={`mt-4 leading-relaxed text-white/40 ${
-              isMain ? "text-base md:text-lg" : "text-sm line-clamp-2"
-            }`}
-          >
-            {post.excerpt}
-          </motion.p>
-
-          {/* Meta info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-6 flex items-center gap-4"
-          >
-            {/* Author */}
-            <div className="flex items-center gap-3">
-              <div className="h-8 w-8 overflow-hidden rounded-full bg-linear-to-br from-acm-blue/40 to-acm-blue/10 ring-1 ring-white/10" />
-              <div>
-                <span className="block text-sm font-medium text-white/70">
-                  {post.author.name}
-                </span>
-                <span className="block font-mono text-[10px] uppercase tracking-wider text-white/30">
-                  {post.author.role}
+            {/* Meta */}
+            <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 rounded-full bg-linear-to-br from-acm-blue/30 to-acm-blue/10 border border-white/10 flex items-center justify-center">
+                  <span className="text-[8px] font-bold text-acm-blue">
+                    {post.author.name.split(' ').map(n => n[0]).join('')}
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <span 
+                    className="text-xs text-white/50"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {post.author.name}
+                  </span>
+                  <span 
+                    className="text-[9px] text-acm-blue/60"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {post.author.team}
+                  </span>
+                </div>
+                <span className="text-white/20">·</span>
+                <span 
+                  className="text-xs text-white/30"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {post.readTime}
                 </span>
               </div>
+              
+              <ArrowUpRight 
+                size={14} 
+                className="text-white/30 group-hover:text-acm-blue group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" 
+              />
             </div>
-
-            <span className="h-4 w-px bg-white/10" />
-
-            {/* Read time */}
-            <span className="font-mono text-[10px] uppercase tracking-wider text-white/30">
-              {post.readTime}
-            </span>
-          </motion.div>
-
-          {/* Read more indicator */}
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6, delay: 0.55 }}
-            className="mt-6 flex items-center gap-2 text-white/40 transition-all duration-300 group-hover:gap-4 group-hover:text-acm-blue"
-          >
-            <span className="font-mono text-xs uppercase tracking-wider">
-              Read Story
-            </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
-          </motion.div>
+          </div>
         </div>
-      </div>
 
-      {/* Hover glow effect */}
-      <div className="pointer-events-none absolute -inset-px rounded-3xl bg-linear-to-br from-acm-blue/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        {/* Hover glow */}
+        <div className="absolute -inset-px bg-linear-to-br from-acm-blue/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      </div>
     </motion.article>
   );
 }

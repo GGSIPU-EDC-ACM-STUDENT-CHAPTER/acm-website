@@ -1,267 +1,279 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 export default function BlogsHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const y = useTransform(smoothProgress, [0, 1], ["0%", "40%"]);
+  const opacity = useTransform(smoothProgress, [0, 0.6], [1, 0]);
+  const scale = useTransform(smoothProgress, [0, 0.5], [1, 0.95]);
 
   useEffect(() => {
     setMounted(true);
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      setMousePosition({
+        x: (e.clientX - innerWidth / 2) / innerWidth,
+        y: (e.clientY - innerHeight / 2) / innerHeight,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Deterministic floating particles
-  const particles = Array.from({ length: 50 }, (_, i) => {
-    const seed = i * 7919;
-    const rand1 = ((seed * 9301 + 49297) % 233280) / 233280;
-    const rand2 = ((seed * 7621 + 81237) % 233280) / 233280;
-    const rand3 = ((seed * 3571 + 91291) % 233280) / 233280;
-    return {
-      id: i,
-      x: rand1 * 100,
-      y: rand2 * 100,
-      size: 1 + rand3 * 3,
-      duration: 10 + rand1 * 20,
-      delay: rand2 * 10,
-    };
-  });
-
-  // Cinematic light beams
-  const lightBeams = Array.from({ length: 5 }, (_, i) => ({
-    id: i,
-    left: 10 + i * 20,
-    width: 2 + (i % 3),
-    duration: 8 + i * 2,
-    delay: i * 1.5,
-  }));
+  // Letters for the main title with staggered animation
+  const titleWord1 = "THE";
+  const titleWord2 = "CHRONICLE";
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[110vh] overflow-hidden bg-black"
+      className="relative h-[120vh] overflow-hidden bg-[#030303]"
     >
-      {/* Fixed hero content */}
+      {/* Sticky container */}
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Ambient background */}
-        <div className="absolute inset-0">
-          {/* Deep space gradient */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `
-                radial-gradient(ellipse 120% 80% at 50% -20%, rgba(0, 133, 202, 0.15), transparent 50%),
-                radial-gradient(ellipse 80% 60% at 80% 80%, rgba(0, 133, 202, 0.08), transparent 40%),
-                radial-gradient(ellipse 60% 40% at 20% 90%, rgba(0, 163, 255, 0.06), transparent 30%),
-                linear-gradient(180deg, #000000 0%, #030308 50%, #000000 100%)
-              `,
-            }}
-          />
+        {/* Dynamic background gradient following mouse */}
+        <motion.div 
+          className="absolute inset-0"
+          animate={{
+            background: `
+              radial-gradient(ellipse 60% 50% at ${50 + mousePosition.x * 10}% ${40 + mousePosition.y * 10}%, rgba(0, 133, 202, 0.08), transparent 50%),
+              radial-gradient(ellipse 80% 60% at 20% 80%, rgba(0, 133, 202, 0.04), transparent 40%),
+              radial-gradient(ellipse 40% 30% at 80% 20%, rgba(0, 100, 180, 0.03), transparent 30%),
+              linear-gradient(180deg, #030303 0%, #050508 50%, #030303 100%)
+            `,
+          }}
+          transition={{ duration: 0.3 }}
+        />
 
-          {/* Cinematic light beams */}
-          {mounted &&
-            lightBeams.map((beam) => (
-              <motion.div
-                key={beam.id}
-                className="absolute top-0 h-full opacity-[0.03]"
-                style={{
-                  left: `${beam.left}%`,
-                  width: `${beam.width}px`,
-                  background:
-                    "linear-gradient(180deg, transparent, rgba(0, 133, 202, 0.8) 30%, rgba(0, 133, 202, 0.8) 70%, transparent)",
-                }}
-                animate={{
-                  opacity: [0.02, 0.06, 0.02],
-                  scaleY: [0.8, 1.2, 0.8],
-                }}
-                transition={{
-                  duration: beam.duration,
-                  repeat: Infinity,
-                  delay: beam.delay,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
+        {/* Floating geometric shapes */}
+        {mounted && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Large rotating ring */}
+            <motion.div
+              className="absolute top-1/4 -right-32 w-[500px] h-[500px] border border-white/[0.03] rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+              style={{
+                x: mousePosition.x * -30,
+                y: mousePosition.y * -30,
+              }}
+            />
+            
+            {/* Medium rotating ring */}
+            <motion.div
+              className="absolute bottom-1/4 -left-20 w-[300px] h-[300px] border border-acm-blue/[0.05] rounded-full"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+              style={{
+                x: mousePosition.x * 20,
+                y: mousePosition.y * 20,
+              }}
+            />
 
-          {/* Floating particles */}
-          {mounted &&
-            particles.map((p) => (
-              <motion.div
-                key={p.id}
-                className="absolute rounded-full bg-white/20"
-                style={{
-                  left: `${p.x}%`,
-                  top: `${p.y}%`,
-                  width: p.size,
-                  height: p.size,
-                }}
-                animate={{
-                  y: [0, -150, 0],
-                  opacity: [0, 0.6, 0],
-                  scale: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: p.duration,
-                  repeat: Infinity,
-                  delay: p.delay,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
+            {/* Floating squares */}
+            <motion.div
+              className="absolute top-[20%] left-[15%] w-20 h-20 border border-white/[0.04] rotate-45"
+              animate={{ 
+                y: [0, -20, 0],
+                rotate: [45, 50, 45],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            
+            <motion.div
+              className="absolute bottom-[30%] right-[20%] w-12 h-12 border border-acm-blue/[0.06] rotate-12"
+              animate={{ 
+                y: [0, 15, 0],
+                rotate: [12, 18, 12],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
 
-          {/* Vignette overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)",
-            }}
-          />
-        </div>
+            {/* Diagonal lines */}
+            <motion.div
+              className="absolute top-0 left-1/3 w-px h-full bg-linear-to-b from-transparent via-white/[0.03] to-transparent"
+              style={{ rotate: "15deg" }}
+            />
+            <motion.div
+              className="absolute top-0 right-1/4 w-px h-full bg-linear-to-b from-transparent via-acm-blue/[0.04] to-transparent"
+              style={{ rotate: "-10deg" }}
+            />
+          </div>
+        )}
 
         {/* Main content */}
         <motion.div
           style={{ y, opacity, scale }}
           className="relative z-10 flex h-full flex-col items-center justify-center px-6 will-change-transform"
         >
-          {/* Cinematic intro text */}
+          {/* Top label */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
-            className="mb-6 flex items-center gap-6"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex items-center gap-6 mb-10"
           >
-            <span className="h-px w-16 bg-linear-to-r from-transparent to-acm-blue/50" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.6em] text-white/40">
-              Stories from the Chapter
+            <motion.div 
+              className="w-16 md:w-24 h-px bg-linear-to-r from-transparent to-acm-blue/40"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            />
+            <span 
+              className="text-[10px] md:text-[11px] tracking-[0.5em] text-white/30 uppercase"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              Stories & Insights
             </span>
-            <span className="h-px w-16 bg-linear-to-l from-transparent to-acm-blue/50" />
+            <motion.div 
+              className="w-16 md:w-24 h-px bg-linear-to-l from-transparent to-acm-blue/40"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            />
           </motion.div>
 
-          {/* Main title with cinematic reveal */}
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                duration: 1.4,
-                delay: 0.5,
-                ease: [0.25, 1, 0.5, 1],
-              }}
-              className="text-center font-display text-7xl font-bold leading-[0.85] tracking-tight md:text-9xl lg:text-[12rem]"
-            >
-              <span className="block bg-linear-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
-                The
-              </span>
-            </motion.h1>
+          {/* Main title - THE */}
+          <div className="overflow-hidden mb-2 md:mb-4">
+            <motion.div className="flex">
+              {titleWord1.split("").map((letter, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ y: 150, opacity: 0, rotateX: -45 }}
+                  animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.4 + i * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="inline-block text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black text-white/90 tracking-tight leading-none"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.div>
           </div>
 
+          {/* Main title - CHRONICLE */}
           <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                duration: 1.4,
-                delay: 0.7,
-                ease: [0.25, 1, 0.5, 1],
-              }}
-              className="text-center font-display text-7xl font-bold leading-[0.85] tracking-tight md:text-9xl lg:text-[12rem]"
-            >
-              <span className="block bg-linear-to-b from-acm-blue via-acm-blue-light to-acm-blue/50 bg-clip-text text-transparent">
-                Chronicle
-              </span>
-            </motion.h1>
+            <motion.div className="flex">
+              {titleWord2.split("").map((letter, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ y: 200, opacity: 0, rotateX: -45 }}
+                  animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                  transition={{
+                    duration: 1.2,
+                    delay: 0.6 + i * 0.05,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="inline-block text-4xl sm:text-5xl md:text-8xl lg:text-[10rem] font-black tracking-tight leading-none"
+                  style={{ 
+                    fontFamily: "var(--font-heading)",
+                    background: "linear-gradient(135deg, #0085CA 0%, #00A3FF 50%, #0085CA 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.div>
           </div>
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-white/50 md:text-xl"
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="mt-8 md:mt-12 max-w-xl text-center text-base md:text-lg text-white/40 leading-relaxed"
+            style={{ fontFamily: "var(--font-body)" }}
           >
-            Where ideas take flight and stories unfold. Dive into tales of
-            innovation, creativity, and the minds shaping tomorrow.
+            Where ideas take form and stories unfold. Explore narratives from the minds shaping tomorrow&apos;s technology.
           </motion.p>
 
-          {/* Decorative elements */}
+          {/* Stats row */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="mt-16 flex flex-col items-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
+            className="mt-8 md:mt-16 flex items-center gap-6 sm:gap-8 md:gap-16"
           >
-            <div className="flex items-center gap-8">
-              <div className="h-px w-24 bg-linear-to-r from-transparent to-white/20" />
-              <div className="flex gap-2">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="h-1.5 w-1.5 rounded-full bg-acm-blue/60"
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.4, 1, 0.4],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="h-px w-24 bg-linear-to-l from-transparent to-white/20" />
-            </div>
+            {[
+              { value: "6", label: "Articles" },
+              { value: "6", label: "Categories" },
+              { value: "500+", label: "Readers" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.6 + i * 0.1 }}
+                className="text-center"
+              >
+                <span 
+                  className="block text-2xl md:text-3xl font-black text-white"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {stat.value}
+                </span>
+                <span 
+                  className="text-[10px] tracking-[0.2em] text-white/30 uppercase"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {stat.label}
+                </span>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Scroll indicator */}
           <motion.div
-            style={{ y: textY }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2 }}
-            className="absolute bottom-16 left-1/2 -translate-x-1/2"
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
           >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="flex flex-col items-center gap-3"
+            <span 
+              className="text-[9px] tracking-[0.4em] text-white/20 uppercase"
+              style={{ fontFamily: "var(--font-body)" }}
             >
-              <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/30">
-                Scroll to discover
-              </span>
-              <div className="relative h-12 w-px overflow-hidden">
-                <motion.div
-                  className="absolute inset-0 bg-linear-to-b from-acm-blue to-transparent"
-                  animate={{ y: ["-100%", "100%"] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </div>
+              Scroll to explore
+            </span>
+            <motion.div
+              className="w-5 h-8 border border-white/20 rounded-full flex items-start justify-center p-1.5"
+            >
+              <motion.div
+                className="w-1 h-2 bg-acm-blue/60 rounded-full"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              />
             </motion.div>
           </motion.div>
         </motion.div>
 
+        {/* Corner accents */}
+        <div className="absolute top-8 left-8 w-16 h-16 border-l border-t border-white/[0.06]" />
+        <div className="absolute top-8 right-8 w-16 h-16 border-r border-t border-white/[0.06]" />
+        <div className="absolute bottom-8 left-8 w-16 h-16 border-l border-b border-white/[0.06]" />
+        <div className="absolute bottom-8 right-8 w-16 h-16 border-r border-b border-white/[0.06]" />
+
         {/* Film grain overlay */}
         <div
-          className="pointer-events-none absolute inset-0 z-20 opacity-[0.015]"
+          className="pointer-events-none absolute inset-0 z-20 opacity-[0.02]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
           }}
