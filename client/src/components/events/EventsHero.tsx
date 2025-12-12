@@ -111,8 +111,8 @@ export default function EventsHero() {
                 height={33}
                 className="h-8 w-auto"
               />
-              <div className="h-px w-8 bg-[var(--text-subtle)]" />
-              <span className="font-mono text-xs tracking-[0.2em] text-[var(--text-subtle)]">
+              <div className="h-px w-8 bg-white/60" />
+              <span className="font-mono text-xs tracking-[0.2em] text-white/60">
                 EXPERIENCES & WORKSHOPS
               </span>
             </motion.div>
@@ -159,7 +159,7 @@ export default function EventsHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-[var(--text-muted)] text-lg md:text-xl max-w-xl leading-relaxed"
+              className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed"
             >
               Where <span className="text-[var(--foreground)]">innovation</span> meets{" "}
               <span className="text-[var(--foreground)]">inspiration</span>. Explore our
@@ -175,24 +175,24 @@ export default function EventsHero() {
               className="mt-16 flex flex-wrap items-end justify-between gap-8 border-t border-[var(--border)] pt-8"
             >
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Events
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">11+ Hosted</p>
+                <p className="text-sm font-medium text-white">11+ Hosted</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Participants
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">1000+</p>
+                <p className="text-sm font-medium text-white">1000+</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Categories
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">6 Types</p>
+                <p className="text-sm font-medium text-white">6 Types</p>
               </div>
 
               {/* Scroll Indicator */}

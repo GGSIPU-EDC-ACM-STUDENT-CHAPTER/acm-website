@@ -34,7 +34,7 @@ export default function ProjectsHero() {
             alt="ACM Projects"
             fill
             priority
-            className="object-cover object-center opacity-50"
+            className="object-cover object-center opacity-60"
             sizes="100vw"
           />
         </motion.div>
@@ -87,9 +87,9 @@ export default function ProjectsHero() {
         </div>
 
         {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-linear-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
-        <div className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-black/60" />
-        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/30 to-black/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/20 to-black/50" />
 
         {/* Main Content */}
         <motion.div
@@ -111,8 +111,8 @@ export default function ProjectsHero() {
                 height={33}
                 className="h-8 w-auto"
               />
-              <div className="h-px w-8 bg-[var(--text-subtle)]" />
-              <span className="font-mono text-xs tracking-[0.2em] text-[var(--text-subtle)]">
+              <div className="h-px w-8 bg-white/60" />
+              <span className="font-mono text-xs tracking-[0.2em] text-white/60">
                 CRAFTED WITH PRECISION
               </span>
             </motion.div>
@@ -159,7 +159,7 @@ export default function ProjectsHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-[var(--text-muted)] text-lg md:text-xl max-w-xl leading-relaxed"
+              className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed"
             >
               Every pixel <span className="text-[var(--foreground)]">tells a story</span>.
               Every interaction is{" "}
@@ -175,24 +175,24 @@ export default function ProjectsHero() {
               className="mt-16 flex flex-wrap items-end justify-between gap-8 border-t border-[var(--border)] pt-8"
             >
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Projects
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">5+ Built</p>
+                <p className="text-sm font-medium text-white">5+ Built</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Technologies
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">12+ Used</p>
+                <p className="text-sm font-medium text-white">12+ Used</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Dedication
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">24/7</p>
+                <p className="text-sm font-medium text-white">24/7</p>
               </div>
 
               {/* Scroll Indicator */}

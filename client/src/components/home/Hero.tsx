@@ -15,7 +15,7 @@ export default function Hero() {
           muted
           playsInline
           poster="/home/EDC-poster.webp"
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-60"
         >
           <source src="/home/EDC.mp4" type="video/mp4" />
         </video>

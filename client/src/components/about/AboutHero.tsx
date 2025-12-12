@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function AboutHero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -25,7 +25,7 @@ export default function AboutHero() {
       {/* Hero Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Background Image with Parallax - Subtle blend */}
-        <motion.div 
+        <motion.div
           style={{ y: imageY, scale }}
           className="absolute inset-0 w-full h-[120%] -top-[10%]"
         >
@@ -34,7 +34,7 @@ export default function AboutHero() {
             alt="GGSIPU East Delhi Campus"
             fill
             priority
-            className="object-cover object-center opacity-40"
+            className="object-cover object-center opacity-60"
             sizes="100vw"
           />
         </motion.div>
@@ -53,9 +53,9 @@ export default function AboutHero() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute -top-1/4 -right-1/4 h-[800px] w-[800px] rounded-full bg-acm-blue/15 blur-[150px]"
+            className="absolute -top-1/4 -right-1/4 h-[800px] w-[800px] rounded-full bg-acm-blue/10 blur-[150px]"
           />
-          
+
           {/* Secondary Orb - Bottom Left */}
           <motion.div
             animate={{
@@ -68,7 +68,7 @@ export default function AboutHero() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute -bottom-1/4 -left-1/4 h-[700px] w-[700px] rounded-full bg-acm-blue/10 blur-[180px]"
+            className="absolute -bottom-1/4 -left-1/4 h-[700px] w-[700px] rounded-full bg-acm-blue/5 blur-[180px]"
           />
 
           {/* Accent Orb - Center */}
@@ -87,9 +87,9 @@ export default function AboutHero() {
         </div>
 
         {/* Gradient Overlays for Smooth Blending */}
-        <div className="absolute inset-0 bg-linear-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
-        <div className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-black/60" />
-        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/30 to-black/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/20 to-black/50" />
 
         {/* Main Content */}
         <motion.div
@@ -111,8 +111,8 @@ export default function AboutHero() {
                 height={33}
                 className="h-8 w-auto"
               />
-              <div className="h-px w-8 bg-[var(--text-subtle)]" />
-              <span className="font-mono text-xs tracking-[0.2em] text-[var(--text-subtle)]">
+              <div className="h-px w-8 bg-white/60" />
+              <span className="font-mono text-xs tracking-[0.2em] text-white/60">
                 GGSIPU EDC
               </span>
             </motion.div>
@@ -130,17 +130,20 @@ export default function AboutHero() {
               </motion.h1>
             </motion.div>
 
-            {/* Subtitle with Outline Effect */}
+            {/* Subtitle with Gradient Fill (Matched to Events) */}
             <motion.div className="overflow-hidden mb-8">
               <motion.h2
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="text-[18vw] sm:text-[14vw] md:text-[12vw] lg:text-[10vw] font-bold leading-[0.85] tracking-tight"
-                style={{ 
+                style={{
                   fontFamily: "var(--font-heading)",
-                  WebkitTextStroke: "1.5px rgba(0, 133, 202, 0.5)",
+                  background:
+                    "linear-gradient(135deg, #0085CA 0%, #00A3FF 50%, #0085CA 100%)",
+                  WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
               >
                 US
@@ -152,7 +155,7 @@ export default function AboutHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-[var(--text-muted)] text-lg md:text-xl max-w-xl leading-relaxed"
+              className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed"
             >
               Where <span className="text-[var(--foreground)]">innovation</span> meets{" "}
               <span className="text-[var(--foreground)]">community</span>. Building the future at{" "}
@@ -167,24 +170,24 @@ export default function AboutHero() {
               className="mt-16 flex flex-wrap items-end justify-between gap-8 border-t border-[var(--border)] pt-8"
             >
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Location
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">East Delhi Campus</p>
+                <p className="text-sm font-medium text-white">East Delhi Campus</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Members
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">50+ Active</p>
+                <p className="text-sm font-medium text-white">50+ Active</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Established
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">2024</p>
+                <p className="text-sm font-medium text-white">2024</p>
               </div>
 
               {/* Scroll Indicator */}

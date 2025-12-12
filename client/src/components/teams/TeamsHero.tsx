@@ -34,7 +34,7 @@ export default function TeamsHero() {
             alt="ACM Team"
             fill
             priority
-            className="object-cover object-center opacity-50"
+            className="object-cover object-center opacity-60"
             sizes="100vw"
           />
         </motion.div>
@@ -87,7 +87,7 @@ export default function TeamsHero() {
         </div>
 
         {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-black/70" />
         <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-black/40" />
         <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/20 to-black/50" />
 
@@ -111,8 +111,8 @@ export default function TeamsHero() {
                 height={33}
                 className="h-8 w-auto"
               />
-              <div className="h-px w-8 bg-[var(--text-subtle)]" />
-              <span className="font-mono text-xs tracking-[0.2em] text-[var(--text-subtle)]">
+              <div className="h-px w-8 bg-white/60" />
+              <span className="font-mono text-xs tracking-[0.2em] text-white/60">
                 MEET THE VISIONARIES
               </span>
             </motion.div>
@@ -159,7 +159,7 @@ export default function TeamsHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-[var(--text-muted)] text-lg md:text-xl max-w-xl leading-relaxed"
+              className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed"
             >
               The <span className="text-[var(--foreground)]">innovators</span>,{" "}
               <span className="text-[var(--foreground)]">creators</span>, and{" "}
@@ -175,24 +175,24 @@ export default function TeamsHero() {
               className="mt-16 flex flex-wrap items-end justify-between gap-8 border-t border-[var(--border)] pt-8"
             >
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Core Members
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">15+ Active</p>
+                <p className="text-sm font-medium text-white">15+ Active</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Domains
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">4 Specializations</p>
+                <p className="text-sm font-medium text-white">4 Specializations</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Faculty Mentors
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">2 Advisors</p>
+                <p className="text-sm font-medium text-white">2 Advisors</p>
               </div>
 
               {/* Scroll Indicator */}

@@ -34,7 +34,7 @@ export default function BlogsHero() {
             alt="ACM Blogs"
             fill
             priority
-            className="object-cover object-center opacity-50"
+            className="object-cover object-center opacity-60"
             sizes="100vw"
           />
         </motion.div>
@@ -87,9 +87,9 @@ export default function BlogsHero() {
         </div>
 
         {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-linear-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
-        <div className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-black/60" />
-        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/30 to-black/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/20 to-black/50" />
 
         {/* Main Content */}
         <motion.div
@@ -111,8 +111,8 @@ export default function BlogsHero() {
                 height={33}
                 className="h-8 w-auto"
               />
-              <div className="h-px w-8 bg-[var(--text-subtle)]" />
-              <span className="font-mono text-xs tracking-[0.2em] text-[var(--text-subtle)]">
+              <div className="h-px w-8 bg-white/60" />
+              <span className="font-mono text-xs tracking-[0.2em] text-white/60">
                 STORIES & INSIGHTS
               </span>
             </motion.div>
@@ -159,7 +159,7 @@ export default function BlogsHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-[var(--text-muted)] text-lg md:text-xl max-w-xl leading-relaxed"
+              className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed"
             >
               <span className="text-[var(--foreground)]">Ideas</span> that inspire.{" "}
               <span className="text-[var(--foreground)]">Stories</span> that resonate.
@@ -175,24 +175,24 @@ export default function BlogsHero() {
               className="mt-16 flex flex-wrap items-end justify-between gap-8 border-t border-[var(--border)] pt-8"
             >
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Articles
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">10+ Stories</p>
+                <p className="text-sm font-medium text-white">10+ Stories</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Topics
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">Tech & Beyond</p>
+                <p className="text-sm font-medium text-white">Tech & Beyond</p>
               </div>
 
               <div className="space-y-1">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
                   Authors
                 </p>
-                <p className="text-sm text-[var(--text-muted)]">ACM Community</p>
+                <p className="text-sm font-medium text-white">ACM Community</p>
               </div>
 
               {/* Scroll Indicator */}
