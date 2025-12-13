@@ -104,7 +104,7 @@ export const eventsData: EventData[] = [
     description: "Hands-on AI workshop introducing students to the fundamentals of Artificial Intelligence and building their first AI agent.",
     fullDescription: "As part of Computer Science Education Week 2025, the GGSIPU EDC ACM Student Chapter organized 'Hour of AI: AI Sparks.' This hands-on workshop introduced students from all disciplines to the fundamentals of Artificial Intelligence. Participants engaged in practical learning by building their first AI agent using Ollama and exploring real-world AI workflows. The virtual session on Google Meet fostered creativity through interactive exercises and concept reinforcement. Attendees received E-Certificates and opportunities to win ACM goodies, successfully marking their entry into the world of intelligent systems.",
     venue: "Online (Google Meet)",
-    participants: "100+",
+    participants: "150+",
     organizers: ["GGSIPU EDC ACM Student Chapter"],
     highlights: [
       "✦ Hands-on AI activity using Hour of AI resources",
@@ -142,7 +142,7 @@ export const eventsData: EventData[] = [
     description: "Roadmap to cracking NVIDIA with Business Intelligence Manager Savio Dmello.",
     fullDescription: "The GGSIPU EDC ACM Student Chapter and USS ACM-W presented the third episode of their #FAANGWeekend series, titled 'From Failures to Offers: How to Crack NVIDIA.' The session featured Savio Dmello, Manager of Business Intelligence at NVIDIA and former IBM Application Architect. Conducted as an exclusive podcast-style session on Google Meet and YouTube, it provided students with a roadmap to navigate tough recruitment journeys. Savio shared actionable advice on overcoming placement failures, understanding what NVIDIA looks for in candidates, and mastering the mindset required for FAANG-level interviews.",
     venue: "Online (Google Meet & YouTube)",
-    participants: "200+",
+    participants: "240+",
     organizers: ["Career Development Cell", "ACM Core Team"],
     highlights: [
       "✦ Roadmap to navigate tough recruitment journeys",
@@ -224,7 +224,7 @@ export const eventsData: EventData[] = [
     description: "Dual-stage technical event blending anime culture with AR treasure hunts and prototyping.",
     fullDescription: "Organized by the GGSIPU EDC ACM Student Chapter as part of the Elysian 2025 fest, Silicon Quest: Animeverse was a unique dual-stage technical event blending anime culture with innovation. Round 1, 'The Digital Otaku Quest,' was an AR-driven treasure hunt where teams solved technical clues to locate 'character card' QR codes. Round 2, 'The Anime Innovation Forge,' was a rapid-prototyping hackathon. The event encouraged creativity and teamwork, awarding prizes including goodies and certificates worth a total of ₹6,000 to the top innovative solutions.",
     venue: "GGSIPU EDC Campus",
-    participants: "120+",
+    participants: "150+",
     organizers: ["Creative Team", "Technical Team"],
     highlights: [
       "✦ AR-driven treasure hunt",
@@ -305,7 +305,7 @@ export const eventsData: EventData[] = [
     description: "Insights from Meta Software Engineer II Sanket Singh on SDE preparation.",
     fullDescription: "The GGSIPU EDC ACM & USS ACM-W Student Chapters hosted the second episode of their flagship online series, #FAANGWEEKEND, titled 'From Failures to Success - How to Get Placed at Meta.' Featuring Sanket Singh, Software Engineer II at Meta, the session demystified the Big Tech recruitment process for undergraduates. Structured as an interactive podcast on Google Meet and YouTube, Mr. Singh provided actionable insights on resume building, interview strategies, and SDE preparation. The event was a resounding success, offering students a clear career roadmap and credit hours for their participation.",
     venue: "Online (Google Meet & YouTube)",
-    participants: "180+",
+    participants: "120+",
     organizers: ["Career Development Cell", "ACM Core Team"],
     highlights: [
       "✦ Demystified Big Tech recruitment",
@@ -343,7 +343,7 @@ export const eventsData: EventData[] = [
     description: "Interactive session on cracking Microsoft interviews with Bharat Ahuja.",
     fullDescription: "The GGSIPU EDC ACM Student Chapter, in collaboration with GGSIP USS ACM-W, launched the 'FAANG Weekend' series with a fully virtual session titled 'From Failure to Offers: How to get placed at Microsoft.' Featuring guest speaker Bharat Ahuja, this online event adopted an interactive podcast format. It was a massive success, reaching full capacity on the live meeting platform, with over 135 additional participants joining via the YouTube livestream. The session demystified the recruitment process, providing students with a strategic roadmap and expert insights for cracking interviews at top tech giants.",
     venue: "Online (Google Meet & YouTube)",
-    participants: "250+",
+    participants: "110+",
     organizers: ["Career Development Cell", "ACM Core Team"],
     highlights: [
       "✦ How to get placed at Microsoft",
@@ -416,7 +416,7 @@ export const eventsData: EventData[] = [
     description: "Speaker session on international academic collaborations and higher education in the US.",
     fullDescription: "The GGSIPU EDC ACM & USS ACM-W Student Chapters organized an enlightening speaker session on 'Education Opportunities in Higher Education – Indo-American Linkages.' The session was delivered by Dr. Ron Buckmire, Dean of the School of Computer Science & Mathematics at Marist University, New York. Dr. Buckmire shared valuable insights into international academic collaborations, research prospects, and pathways for higher education in the US. The interactive session guided students on navigating the evolving landscape of global education and emphasized the importance of interdisciplinary learning in the era of AI and automation.",
     venue: "Lec Hall",
-    participants: "500+",
+    participants: "80+",
     organizers: ["University Administration", "ACM Core Team"],
     highlights: [
       "✦ Education Opportunities in Higher Education",
@@ -455,7 +455,7 @@ export const eventsData: EventData[] = [
     description: "State-level challenge addressing critical urban issues like traffic, waste, and safety.",
     fullDescription: "The Smart Delhi Ideathon 2025 was organized by GGSIPU in collaboration with the GGSIPU EDC ACM Student Chapter, AICTE IDEA Lab, and IPCA. This state-level challenge addressed critical urban issues like traffic, waste, air quality, and women's safety, aligning with UN SDG 11. The Grand Finale at Vigyan Bhawan featured a substantial prize pool: ₹5 Lakh for the winner, ₹3 Lakh for the 1st runner-up, and ₹1 Lakh for the 2nd runner-up. The chapter played a key role in facilitating this event, where top teams presented scalable technical solutions for a smarter, sustainable Delhi.",
     venue: "Vigyan Bhawan (Grand Finale)",
-    participants: "400+",
+    participants: "2000+",
     organizers: ["Delhi Government", "GGSIPU", "ACM Chapter"],
     highlights: [
       "✦ Critical urban issues (traffic, waste, safety)",

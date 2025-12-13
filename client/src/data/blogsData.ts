@@ -72,10 +72,10 @@ The intersection of blockchain with other emerging technologies like AI and IoT 
 
 Blockchain is not just about cryptocurrency—it's about creating trust in a trustless environment. As developers and technologists, understanding blockchain fundamentals will be crucial as this technology continues to reshape how we think about data, trust, and digital interactions.`,
     author: {
-      name: "Karan Malhotra",
+      name: "Bhavya Jain",
       role: "Blockchain Enthusiast",
       team: "Technical Domain",
-      avatar: "/team/karan.jpg",
+      avatar: "/team/bhavya.jpg",
     },
     category: "Blockchain",
     tags: ["Blockchain", "Web3", "Cryptocurrency", "Technology"],
@@ -156,10 +156,10 @@ Designing for accessibility isn't just about compliance—it's about creating be
 
 Great UI/UX design is invisible. When users accomplish their goals without friction, without confusion, without frustration—that's when you know the design is working. Remember: you're not designing for yourself; you're designing for humans with limited attention, patience, and cognitive resources.`,
     author: {
-      name: "Nisha Kapoor",
+      name: "Utkarsh Yadav",
       role: "Design Enthusiast",
       team: "Creative Domain",
-      avatar: "/team/nisha.jpg",
+      avatar: "/team/utkarsh.jpg",
     },
     category: "Design",
     tags: ["UI/UX", "Design Psychology", "User Experience"],
@@ -255,10 +255,10 @@ The goal is to find the sweet spot where the model generalizes well to new data.
 
 Machine learning isn't magic—it's mathematics. Understanding the fundamentals helps you choose the right algorithm for your problem and debug issues when they arise. The field is constantly evolving, but these foundational concepts remain relevant.`,
     author: {
-      name: "Rahul Krishnan",
+      name: "Shantanu Ojha",
       role: "ML Researcher",
       team: "Technical Domain",
-      avatar: "/team/rahul.jpg",
+      avatar: "/team/shantanu.jpg",
     },
     category: "Machine Learning",
     tags: ["AI", "Machine Learning", "Neural Networks", "Algorithms"],
@@ -370,10 +370,10 @@ Big O notation describes how runtime grows with input size:
 
 DSA mastery doesn't come overnight. It requires consistent practice and deep understanding. But the investment pays dividends throughout your career—in interviews, in building scalable systems, and in becoming a better problem solver.`,
     author: {
-      name: "Ayesha Rahman",
+      name: "Ritwik Mittal",
       role: "Competitive Programmer",
       team: "Technical Domain",
-      avatar: "/team/ayesha.jpg",
+      avatar: "/team/ritwik.jpg",
     },
     category: "Programming",
     tags: ["Algorithms", "Data Structures", "Problem Solving", "Coding"],
@@ -480,10 +480,10 @@ Web3 is still nascent. Many applications are experiments, and the technology is 
 
 Whether Web3 achieves mainstream adoption depends on solving real problems for real users, not just creating speculative assets. The builders who focus on utility over hype will shape what Web3 becomes.`,
     author: {
-      name: "Vikrant Thakur",
+      name: "Abhijith KS",
       role: "Web3 Developer",
       team: "Technical Domain",
-      avatar: "/team/vikrant.jpg",
+      avatar: "/team/abhijith.jpg",
     },
     category: "Web3",
     tags: ["Web3", "Blockchain", "DeFi", "Cryptocurrency"],
@@ -617,10 +617,10 @@ Clean code isn't about perfection—it's about communication. We write code for 
 
 The best programmers aren't those who write clever code. They're those who write code that everyone can understand.`,
     author: {
-      name: "Meera Joshi",
+      name: "Arsh Ahmad",
       role: "Software Engineer",
       team: "Technical Domain",
-      avatar: "/team/meera.jpg",
+      avatar: "/team/arsh.jpg",
     },
     category: "Programming",
     tags: ["Clean Code", "Best Practices", "Software Engineering"],

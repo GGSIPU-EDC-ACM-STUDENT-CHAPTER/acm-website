@@ -68,7 +68,7 @@ export default function FAQSection() {
           className="flex items-center gap-6 mb-8"
         >
           <div className="w-16 md:w-24 h-px bg-linear-to-r from-acm-blue/60 to-transparent" />
-          <span 
+          <span
             className="text-[10px] md:text-[11px] font-light tracking-[0.5em] text-white/30 uppercase"
             style={{ fontFamily: "var(--font-body)" }}
           >
@@ -106,32 +106,29 @@ export default function FAQSection() {
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   className="group"
                 >
-                  <div 
-                    className={`relative bg-[var(--surface)] border transition-all duration-300 ${
-                      openIndex === index 
-                        ? 'border-acm-blue/30' 
-                        : 'border-white/5 hover:border-white/10'
-                    }`}
+                  <div
+                    className={`relative bg-[var(--surface)] border transition-all duration-300 ${openIndex === index
+                      ? 'border-acm-blue/30'
+                      : 'border-white/5 hover:border-white/10'
+                      }`}
                   >
                     {/* Question Button */}
                     <button
                       onClick={() => setOpenIndex(openIndex === index ? null : index)}
                       className="w-full flex items-center justify-between p-5 md:p-6 text-left"
                     >
-                      <span 
-                        className={`pr-8 text-sm md:text-base font-medium transition-colors duration-300 ${
-                          openIndex === index ? 'text-white' : 'text-white/70'
-                        }`}
+                      <span
+                        className={`pr-8 text-sm md:text-base font-medium transition-colors duration-300 ${openIndex === index ? 'text-white' : 'text-white/70'
+                          }`}
                         style={{ fontFamily: "var(--font-body)" }}
                       >
                         {faq.question}
                       </span>
-                      <div 
-                        className={`shrink-0 w-8 h-8 flex items-center justify-center border transition-all duration-300 ${
-                          openIndex === index 
-                            ? 'border-acm-blue bg-acm-blue/10' 
-                            : 'border-white/10 bg-transparent'
-                        }`}
+                      <div
+                        className={`shrink-0 w-8 h-8 flex items-center justify-center border transition-all duration-300 ${openIndex === index
+                          ? 'border-acm-blue bg-acm-blue/10'
+                          : 'border-white/10 bg-transparent'
+                          }`}
                       >
                         {openIndex === index ? (
                           <Minus className="w-4 h-4 text-acm-blue" />
@@ -142,7 +139,7 @@ export default function FAQSection() {
                     </button>
 
                     {/* Answer */}
-                    <AnimatePresence>
+                    <AnimatePresence initial={false}>
                       {openIndex === index && (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
@@ -153,7 +150,7 @@ export default function FAQSection() {
                         >
                           <div className="px-5 md:px-6 pb-5 md:pb-6 pt-0">
                             <div className="pt-4 border-t border-white/5">
-                              <p 
+                              <p
                                 className="text-sm text-white/40 leading-[1.8]"
                                 style={{ fontFamily: "var(--font-body)" }}
                               >
