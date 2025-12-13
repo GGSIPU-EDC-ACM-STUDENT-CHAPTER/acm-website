@@ -34,6 +34,7 @@ export default function TeamsHero() {
             alt="ACM Team"
             fill
             priority
+            fetchPriority="high"
             className="object-cover object-center opacity-60"
             sizes="100vw"
           />

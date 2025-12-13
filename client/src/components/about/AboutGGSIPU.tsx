@@ -62,7 +62,7 @@ export default function AboutGGSIPU() {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0)`,
@@ -84,7 +84,7 @@ export default function AboutGGSIPU() {
           className="flex items-center gap-6 mb-8"
         >
           <div className="w-16 md:w-24 h-px bg-linear-to-r from-acm-blue/60 to-transparent" />
-          <span 
+          <span
             className="text-[10px] md:text-[11px] font-light tracking-[0.5em] text-white/30 uppercase"
             style={{ fontFamily: "var(--font-body)" }}
           >
@@ -144,7 +144,7 @@ export default function AboutGGSIPU() {
 
               {/* Tagline */}
               <div className="mt-6 text-center">
-                <p 
+                <p
                   className="text-white/30 text-sm tracking-normal uppercase"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
@@ -161,7 +161,7 @@ export default function AboutGGSIPU() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="absolute -bottom-6 -right-6 bg-acm-blue px-6 py-3"
             >
-              <span 
+              <span
                 className="text-[var(--foreground)] text-sm font-medium tracking-normal"
                 style={{ fontFamily: "var(--font-body)" }}
               >
@@ -179,32 +179,32 @@ export default function AboutGGSIPU() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-6"
             >
-              <p 
+              <p
                 className="text-white/50 text-base md:text-lg leading-[1.8]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                <span className="text-[var(--foreground)] font-medium">Guru Gobind Singh Indraprastha University (GGSIPU)</span> is 
-                a premier state university established by the Government of NCT of Delhi in 1998. 
-                Named after the tenth Sikh Guru, Guru Gobind Singh, the university has grown to become 
+                <span className="text-[var(--foreground)] font-medium">Guru Gobind Singh Indraprastha University (GGSIPU)</span> is
+                a premier state university established by the Government of NCT of Delhi in 1998.
+                Named after the tenth Sikh Guru, Guru Gobind Singh, the university has grown to become
                 one of the largest affiliating universities in India.
               </p>
 
-              <p 
+              <p
                 className="text-white/40 text-sm md:text-base leading-[1.8]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                The <span className="text-white/60">East Delhi Campus (EDC)</span> is one of the university&apos;s 
-                key campuses located in Vishwas Nagar, Shahdara. It houses four prestigious schools offering 
-                world-class education in Engineering, Design, Sciences, and Media. Known for its dedicated 
+                The <span className="text-white/60">East Delhi Campus (EDC)</span> is one of the university&apos;s
+                key campuses located in Vishwas Nagar, Shahdara. It houses four prestigious schools offering
+                world-class education in Engineering, Design, Sciences, and Media. Known for its dedicated
                 faculty and vibrant student community, EDC has become a hub for innovation and academic excellence.
               </p>
 
-              <p 
+              <p
                 className="text-white/40 text-sm md:text-base leading-[1.8]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                With a focus on holistic development, the campus encourages students to participate 
-                in technical clubs, cultural activities, and entrepreneurship initiatives, 
+                With a focus on holistic development, the campus encourages students to participate
+                in technical clubs, cultural activities, and entrepreneurship initiatives,
                 fostering an environment where creativity and technology thrive together.
               </p>
 
@@ -216,7 +216,7 @@ export default function AboutGGSIPU() {
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 hover:border-acm-blue/50 bg-white/2 transition-all duration-300"
                 >
-                  <span 
+                  <span
                     className="text-sm text-white/60 group-hover:text-[var(--foreground)] transition-colors"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
@@ -231,7 +231,7 @@ export default function AboutGGSIPU() {
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 hover:border-acm-blue/50 bg-white/2 transition-all duration-300"
                 >
-                  <span 
+                  <span
                     className="text-sm text-white/60 group-hover:text-[var(--foreground)] transition-colors"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
@@ -257,19 +257,19 @@ export default function AboutGGSIPU() {
             >
               {/* Accent Line */}
               <div className="absolute top-0 left-0 w-full h-1 bg-acm-blue/30 group-hover:bg-acm-blue/60 transition-colors duration-300" />
-              
+
               <div className="flex items-start gap-4 mt-2">
                 <div className="p-2 bg-white/2 border border-white/5">
                   <item.icon className="w-5 h-5 text-acm-blue" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h4 
+                  <h4
                     className="text-lg font-bold text-[var(--foreground)] mb-1"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {item.title}
                   </h4>
-                  <p 
+                  <p
                     className="text-sm text-white/40"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
@@ -288,7 +288,7 @@ export default function AboutGGSIPU() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <h3 
+          <h3
             className="text-xl md:text-2xl font-black text-[var(--foreground)] mb-8"
             style={{ fontFamily: "var(--font-heading)" }}
           >
@@ -312,25 +312,25 @@ export default function AboutGGSIPU() {
                   <div className="p-3 bg-acm-blue/10 border border-acm-blue/20 shrink-0">
                     <school.icon className="w-6 h-6 text-acm-blue" strokeWidth={1.5} />
                   </div>
-                  
+
                   <div>
                     <div className="flex items-baseline gap-3 mb-2">
-                      <span 
+                      <span
                         className="text-2xl md:text-3xl font-black text-[var(--foreground)]"
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
                         {school.abbr}
                       </span>
                     </div>
-                    
-                    <h4 
+
+                    <h4
                       className="text-sm text-acm-blue/80 mb-3"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {school.name}
                     </h4>
-                    
-                    <p 
+
+                    <p
                       className="text-sm text-white/40 leading-relaxed"
                       style={{ fontFamily: "var(--font-body)" }}
                     >

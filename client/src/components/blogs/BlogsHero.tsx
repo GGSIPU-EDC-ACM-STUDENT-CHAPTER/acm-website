@@ -34,6 +34,7 @@ export default function BlogsHero() {
             alt="ACM Blogs"
             fill
             priority
+            fetchPriority="high"
             className="object-cover object-center opacity-60"
             sizes="100vw"
           />

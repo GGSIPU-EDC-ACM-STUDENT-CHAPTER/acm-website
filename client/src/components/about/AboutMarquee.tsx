@@ -9,7 +9,7 @@ export default function AboutMarquee() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  
+
   const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
   const x2 = useTransform(scrollYProgress, [0, 1], ["-20%", "10%"]);
 
@@ -26,8 +26,8 @@ export default function AboutMarquee() {
 
       {/* First Marquee Row - Outlined text */}
       <div className="relative mb-2 overflow-hidden">
-        <motion.div 
-          style={{ x: x1 }} 
+        <motion.div
+          style={{ x: x1 }}
           className="flex whitespace-nowrap items-center gap-8"
         >
           {Array.from({ length: repeatCount }).map((_, i) => (
@@ -48,8 +48,8 @@ export default function AboutMarquee() {
 
       {/* Second Marquee Row - Solid ACM Blue */}
       <div className="relative overflow-hidden">
-        <motion.div 
-          style={{ x: x2 }} 
+        <motion.div
+          style={{ x: x2 }}
           className="flex whitespace-nowrap items-center gap-12"
         >
           {Array.from({ length: repeatCount }).map((_, i) => (

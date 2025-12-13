@@ -44,7 +44,7 @@ export const metadata: Metadata = {
       "Empowering students to innovate, collaborate, and lead in the world of computing.",
     images: [
       {
-        url: "/og-image.jpg", // Ensure this exists or use a generic one
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "GGSIPU EDC ACM Student Chapter",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "GGSIPU EDC ACM Student Chapter",
     description:
       "Empowering students to innovate, collaborate, and lead in the world of computing.",
-    images: ["/og-image.jpg"], // Ensure this exists
+    images: ["/og-image.png"],
   },
 };
 
@@ -67,6 +67,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/bebas-neue/BebasNeue-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/montserrat/Montserrat-Variable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="antialiased" suppressHydrationWarning>
         <ClientLayout>
           <Navbar />

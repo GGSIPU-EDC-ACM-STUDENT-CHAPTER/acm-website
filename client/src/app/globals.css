@@ -1,7 +1,7 @@
 /* Local Font Definitions */
 @font-face {
   font-family: "Bebas Neue";
-  src: url("/fonts/bebas-neue/BebasNeue-Regular.ttf") format("truetype");
+  src: url("/fonts/bebas-neue/BebasNeue-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/fonts/montserrat/Montserrat-Variable.ttf") format("truetype");
+  src: url("/fonts/montserrat/Montserrat-Variable.woff2") format("woff2");
   font-weight: 300 800;
   font-style: normal;
   font-display: swap;

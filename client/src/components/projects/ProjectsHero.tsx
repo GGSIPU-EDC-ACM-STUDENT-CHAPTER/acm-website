@@ -34,6 +34,7 @@ export default function ProjectsHero() {
             alt="ACM Projects"
             fill
             priority
+            fetchPriority="high"
             className="object-cover object-center opacity-60"
             sizes="100vw"
           />

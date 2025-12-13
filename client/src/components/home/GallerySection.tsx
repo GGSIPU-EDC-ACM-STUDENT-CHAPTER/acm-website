@@ -150,7 +150,7 @@ export default function MarqueeColumnSection() {
                 <div className="max-w-[1400px] mx-auto">
                     <div className="flex items-center gap-4 sm:gap-6 mb-4">
                         <div className="w-10 sm:w-16 h-px bg-acm-blue/50" />
-                        <span className="text-[10px] sm:text-[11px] font-light tracking-[0.5em] text-white/30 uppercase" style={{ fontFamily: "var(--font-body)" }}>
+                        <span className="text-[10px] sm:text-[11px] font-light tracking-[0.5em] text-white/60 uppercase" style={{ fontFamily: "var(--font-body)" }}>
                             Gallery
                         </span>
                     </div>

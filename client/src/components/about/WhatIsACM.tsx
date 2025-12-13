@@ -30,7 +30,7 @@ export default function WhatIsACM() {
           className="flex items-center gap-6 mb-8"
         >
           <div className="w-16 md:w-24 h-px bg-linear-to-r from-acm-blue/60 to-transparent" />
-          <span 
+          <span
             className="text-[10px] md:text-[11px] font-light tracking-[0.5em] text-white/30 uppercase"
             style={{ fontFamily: "var(--font-body)" }}
           >
@@ -63,9 +63,9 @@ export default function WhatIsACM() {
               className="text-white/50 text-base md:text-lg leading-[1.8] mb-6"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              The <span className="text-[var(--foreground)] font-medium">Association for Computing Machinery</span> is 
-              the world&apos;s largest educational and scientific computing society, 
-              uniting educators, researchers, and professionals to inspire dialogue, 
+              The <span className="text-[var(--foreground)] font-medium">Association for Computing Machinery</span> is
+              the world&apos;s largest educational and scientific computing society,
+              uniting educators, researchers, and professionals to inspire dialogue,
               share resources, and address the field&apos;s challenges.
             </motion.p>
 
@@ -77,7 +77,7 @@ export default function WhatIsACM() {
               className="text-white/40 text-sm md:text-base leading-[1.8] mb-10"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              Founded in 1947, ACM has grown to include more than 100,000 members 
+              Founded in 1947, ACM has grown to include more than 100,000 members
               from over 190 countries, making it a truly global community of computing professionals.
             </motion.p>
 
@@ -95,13 +95,13 @@ export default function WhatIsACM() {
                 { value: "190+", label: "Countries" },
               ].map((stat, i) => (
                 <div key={i} className="border-l border-white/10 pl-4">
-                  <div 
+                  <div
                     className="text-2xl md:text-3xl font-black text-[var(--foreground)] mb-1"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {stat.value}
                   </div>
-                  <div 
+                  <div
                     className="text-[10px] md:text-xs tracking-normalr text-white/30 uppercase"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
@@ -156,7 +156,7 @@ export default function WhatIsACM() {
 
               {/* Tagline */}
               <div className="mt-8 text-center">
-                <p 
+                <p
                   className="text-white/30 text-sm tracking-normalst uppercase"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
@@ -173,7 +173,7 @@ export default function WhatIsACM() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="absolute -bottom-6 -right-6 bg-acm-blue px-6 py-3"
             >
-              <span 
+              <span
                 className="text-[var(--foreground)] text-sm font-medium tracking-normal"
                 style={{ fontFamily: "var(--font-body)" }}
               >
@@ -222,7 +222,7 @@ export default function WhatIsACM() {
 
                 {/* Tagline */}
                 <div className="mt-8 text-center">
-                  <p 
+                  <p
                     className="text-white/30 text-sm tracking-normal uppercase"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
@@ -239,7 +239,7 @@ export default function WhatIsACM() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="absolute -bottom-6 -left-6 bg-acm-blue px-6 py-3"
               >
-                <span 
+                <span
                   className="text-[var(--foreground)] text-sm font-medium tracking-normal"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
@@ -269,9 +269,9 @@ export default function WhatIsACM() {
                 className="text-white/50 text-base md:text-lg leading-[1.8] mb-6"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                <span className="text-[var(--foreground)] font-medium">ACM India</span> is a council of ACM that 
-                serves the computing community in India. It aims to expand computing research, 
-                education, and community in India by organizing conferences, sponsoring events, 
+                <span className="text-[var(--foreground)] font-medium">ACM India</span> is a council of ACM that
+                serves the computing community in India. It aims to expand computing research,
+                education, and community in India by organizing conferences, sponsoring events,
                 and supporting student chapters across the country.
               </motion.p>
 
@@ -283,9 +283,9 @@ export default function WhatIsACM() {
                 className="text-white/40 text-sm md:text-base leading-[1.8] mb-8"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                With over 100+ professional chapters and 500+ student chapters, ACM India is one of 
-                the largest and most active ACM regions globally. It hosts flagship events like 
-                COMPUTE, organizes summer schools, and runs programs like the ACM India Doctoral 
+                With over 100+ professional chapters and 500+ student chapters, ACM India is one of
+                the largest and most active ACM regions globally. It hosts flagship events like
+                COMPUTE, organizes summer schools, and runs programs like the ACM India Doctoral
                 Dissertation Award to recognize outstanding research.
               </motion.p>
 
@@ -303,13 +303,13 @@ export default function WhatIsACM() {
                   { value: "2010", label: "Established" },
                 ].map((stat, i) => (
                   <div key={i} className="border-l border-white/10 pl-4">
-                    <div 
+                    <div
                       className="text-xl md:text-2xl font-black text-[var(--foreground)] mb-1"
                       style={{ fontFamily: "var(--font-heading)" }}
                     >
                       {stat.value}
                     </div>
-                    <div 
+                    <div
                       className="text-[10px] md:text-xs tracking-normal text-white/30 uppercase"
                       style={{ fontFamily: "var(--font-body)" }}
                     >

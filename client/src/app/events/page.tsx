@@ -1,9 +1,15 @@
+import { Metadata } from "next";
 import {
   EventsHero,
   EventsMarquee,
   EventsShowcase,
   EventsClosing,
 } from "@/components/events";
+
+export const metadata: Metadata = {
+  title: "Events",
+  description: "Explore workshops, hackathons, seminars, and tech events hosted by GGSIPU EDC ACM Student Chapter. From coding bootcamps to industry talks.",
+};
 
 export default function EventsPage() {
   return (

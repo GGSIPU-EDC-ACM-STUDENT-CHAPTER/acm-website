@@ -14,6 +14,8 @@ export default function Hero() {
           loop
           muted
           playsInline
+          // @ts-expect-error fetchPriority is valid for video but not typed in React
+          fetchPriority="high"
           poster="/home/EDC-poster.webp"
           className="w-full h-full object-cover opacity-60"
         >
@@ -116,7 +118,7 @@ export default function Hero() {
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="px-6 sm:px-8 py-3 sm:py-4 bg-acm-blue text-[var(--foreground)] text-sm tracking-[0.2em] uppercase font-medium hover:bg-acm-blue/90 transition-colors cursor-pointer"
+                    className="px-6 sm:px-8 py-3 sm:py-4 bg-acm-blue text-white text-sm tracking-[0.2em] uppercase font-medium hover:bg-acm-blue/90 transition-colors cursor-pointer"
                   >
                     Join Community
                   </motion.div>

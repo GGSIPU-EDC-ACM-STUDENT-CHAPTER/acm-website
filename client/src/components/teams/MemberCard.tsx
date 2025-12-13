@@ -146,6 +146,7 @@ export default function MemberCard({ member, index }: MemberCardProps) {
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${member.name}'s LinkedIn profile`}
                 className="p-2 bg-white/5 border border-white/5 hover:border-acm-blue/30 hover:bg-acm-blue/10 transition-all duration-300"
               >
                 <Linkedin className="w-4 h-4 text-white/40 hover:text-acm-blue transition-colors" />

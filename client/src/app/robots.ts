@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://acm-website-client.vercel.app/sitemap.xml',
+        sitemap: 'https://usar.acm.org/sitemap.xml',
     };
 }

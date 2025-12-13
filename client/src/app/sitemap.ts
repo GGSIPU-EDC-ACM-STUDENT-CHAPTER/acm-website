@@ -5,7 +5,7 @@ export const dynamic = 'force-static';
 
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://acm-website-client.vercel.app'; // Replace with actual domain if known, using placeholder or previous specific one
+    const baseUrl = 'https://usar.acm.org';
 
     // Static routes
     const routes = [

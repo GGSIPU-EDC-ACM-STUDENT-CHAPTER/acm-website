@@ -81,6 +81,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
               href={member.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${member.name}'s LinkedIn profile`}
               className="absolute bottom-5 right-5 w-8 h-8 flex items-center justify-center bg-white/5 border border-white/10 text-white/40 hover:text-acm-blue hover:border-acm-blue/40 transition-all duration-300"
             >
               <Linkedin size={14} />

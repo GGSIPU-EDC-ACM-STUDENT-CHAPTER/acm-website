@@ -34,6 +34,7 @@ export default function AboutHero() {
             alt="GGSIPU East Delhi Campus"
             fill
             priority
+            fetchPriority="high"
             className="object-cover object-center opacity-60"
             sizes="100vw"
           />

@@ -154,12 +154,12 @@ export default function Footer() {
             <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
               {FOOTER_LINKS.map((section, index) => (
                 <div key={index}>
-                  <h4
-                    className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/30 mb-6"
+                  <span
+                    className="block text-[10px] font-medium uppercase tracking-[0.3em] text-white/30 mb-6"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     {section.title}
-                  </h4>
+                  </span>
                   <ul className="space-y-3">
                     {section.links.map((link, linkIndex) => (
                       <li key={linkIndex}>

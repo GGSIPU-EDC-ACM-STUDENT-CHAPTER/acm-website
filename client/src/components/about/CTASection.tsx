@@ -6,25 +6,25 @@ import Link from "next/link";
 import { ArrowRight, Instagram, Linkedin, Mail, Youtube } from "lucide-react";
 
 const socialLinks = [
-  { 
-    name: "Instagram", 
-    href: "https://instagram.com/usaracm", 
-    icon: Instagram 
+  {
+    name: "Instagram",
+    href: "https://instagram.com/usaracm",
+    icon: Instagram
   },
-  { 
-    name: "LinkedIn", 
-    href: "https://linkedin.com/company/usaracm", 
-    icon: Linkedin 
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/company/usaracm",
+    icon: Linkedin
   },
-  { 
-    name: "YouTube", 
-    href: "https://www.youtube.com/@usaracm", 
-    icon: Youtube 
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@usaracm",
+    icon: Youtube
   },
-  { 
-    name: "Email", 
-    href: "mailto:usaracm@ipu.ac.in", 
-    icon: Mail 
+  {
+    name: "Email",
+    href: "mailto:usaracm@ipu.ac.in",
+    icon: Mail
   },
 ];
 
@@ -45,7 +45,7 @@ export default function CTASection() {
 
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
@@ -67,7 +67,7 @@ export default function CTASection() {
             className="flex items-center justify-center gap-4 mb-8"
           >
             <div className="w-12 h-px bg-white/20" />
-            <span 
+            <span
               className="text-[10px] md:text-[11px] tracking-[0.5em] text-white/40 uppercase"
               style={{ fontFamily: "var(--font-body)" }}
             >
@@ -99,7 +99,7 @@ export default function CTASection() {
             className="text-white/40 text-base md:text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Join our community of innovators, creators, and tech enthusiasts. 
+            Join our community of innovators, creators, and tech enthusiasts.
             Whether you want to learn, build, or connect—there&apos;s a place for you here.
           </motion.p>
 
@@ -170,8 +170,8 @@ export default function CTASection() {
             style={{ fontFamily: "var(--font-body)" }}
           >
             Questions? Reach out at{" "}
-            <a 
-              href="mailto:usaracm@ipu.ac.in" 
+            <a
+              href="mailto:usaracm@ipu.ac.in"
               className="text-white/50 hover:text-acm-blue transition-colors duration-300"
             >
               usaracm@ipu.ac.in
