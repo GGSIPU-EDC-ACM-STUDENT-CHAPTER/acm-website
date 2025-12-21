@@ -8,8 +8,6 @@ import Image from "next/image";
 import {
   facultyMembers,
   officeBearers,
-  technicalTeam,
-  creativeTeam,
   TeamMember,
 } from "@/data/teamData";
 import { TextReveal } from "@/components/TextReveal";
@@ -65,7 +63,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
         {/* Content */}
         <div className="relative p-5 -mt-12">
           <h3
-            className="text-xl md:text-2xl font-black text-white mb-1 tracking-normal"
+            className="text-xl md:text-2xl font-black text-[var(--foreground)] mb-1 tracking-normal"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             {member.name}
@@ -83,6 +81,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
               href={member.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${member.name}'s LinkedIn profile`}
               className="absolute bottom-5 right-5 w-8 h-8 flex items-center justify-center bg-white/5 border border-white/10 text-white/40 hover:text-acm-blue hover:border-acm-blue/40 transition-all duration-300"
             >
               <Linkedin size={14} />
@@ -137,7 +136,7 @@ function SectionHeader({
           </span>
         </div>
         <h3
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-normal"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-[var(--foreground)] tracking-normal"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {title}
@@ -193,7 +192,7 @@ export default function Teams() {
               </span>
             </div>
             <h2
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-normal"
+              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-[var(--foreground)] tracking-normal"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               <TextReveal text="Our Team" delay={0.1} />
@@ -235,33 +234,7 @@ export default function Teams() {
             </div>
           </div>
 
-          {/* Technical Domain Section */}
-          <div className="mb-24">
-            <SectionHeader
-              index="03"
-              label="Engineers"
-              title="Technical Domain"
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {technicalTeam.map((member, index) => (
-                <MemberCard key={`tech-${member.role}-${index}`} member={member} index={index} />
-              ))}
-            </div>
-          </div>
 
-          {/* Creative Domain Section */}
-          <div className="mb-24">
-            <SectionHeader
-              index="04"
-              label="Creatives"
-              title="Creative Domain"
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {creativeTeam.map((member, index) => (
-                <MemberCard key={`creative-${member.role}-${index}`} member={member} index={index} />
-              ))}
-            </div>
-          </div>
 
           {/* View All CTA */}
           <motion.div
@@ -276,7 +249,7 @@ export default function Teams() {
               className="group inline-flex items-center gap-4 px-8 py-4 bg-white/3 border border-white/10 hover:border-acm-blue/40 hover:bg-acm-blue/5 transition-all duration-500"
             >
               <span
-                className="text-sm font-medium text-white/70 group-hover:text-white tracking-normal transition-colors duration-300"
+                className="text-sm font-medium text-white/70 group-hover:text-[var(--foreground)] tracking-normal transition-colors duration-300"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 View All Team Members
@@ -291,7 +264,7 @@ export default function Teams() {
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[var(--background)] to-transparent pointer-events-none" />
     </section>
   );
 }

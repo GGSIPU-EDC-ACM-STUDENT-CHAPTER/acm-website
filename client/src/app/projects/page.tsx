@@ -1,16 +1,11 @@
-"use client";
+import { Metadata } from "next";
+import ProjectsPageClient from "./ProjectsPageClient";
 
-import ProjectsHero from "@/components/projects/ProjectsHero";
-import ProjectsGallery from "@/components/projects/ProjectsGallery";
-import ProjectsClosing from "@/components/projects/ProjectsClosing";
-import { projects } from "@/data/projectsData";
+export const metadata: Metadata = {
+  title: "Our Projects",
+  description: "Explore innovative projects built by GGSIPU EDC ACM members — from web apps to AI solutions, robotics to sustainability tech.",
+};
 
 export default function ProjectsPage() {
-  return (
-    <main className="bg-[#030303] text-white selection:bg-acm-blue/30">
-      <ProjectsHero />
-      <ProjectsGallery projects={projects} />
-      <ProjectsClosing />
-    </main>
-  );
+  return <ProjectsPageClient />;
 }

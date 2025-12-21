@@ -3,28 +3,28 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, Instagram, Linkedin, Github, Mail } from "lucide-react";
+import { ArrowRight, Instagram, Linkedin, Mail, Youtube } from "lucide-react";
 
 const socialLinks = [
-  { 
-    name: "Instagram", 
-    href: "https://instagram.com/acm_ggsipu_edc", 
-    icon: Instagram 
+  {
+    name: "Instagram",
+    href: "https://instagram.com/usaracm",
+    icon: Instagram
   },
-  { 
-    name: "LinkedIn", 
-    href: "https://linkedin.com/company/acm-ggsipu-edc", 
-    icon: Linkedin 
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/company/usaracm",
+    icon: Linkedin
   },
-  { 
-    name: "GitHub", 
-    href: "https://github.com/acm-ggsipu-edc", 
-    icon: Github 
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@usaracm",
+    icon: Youtube
   },
-  { 
-    name: "Email", 
-    href: "mailto:usaracm@ipu.ac.in", 
-    icon: Mail 
+  {
+    name: "Email",
+    href: "mailto:usaracm@ipu.ac.in",
+    icon: Mail
   },
 ];
 
@@ -45,7 +45,7 @@ export default function CTASection() {
 
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
@@ -67,7 +67,7 @@ export default function CTASection() {
             className="flex items-center justify-center gap-4 mb-8"
           >
             <div className="w-12 h-px bg-white/20" />
-            <span 
+            <span
               className="text-[10px] md:text-[11px] tracking-[0.5em] text-white/40 uppercase"
               style={{ fontFamily: "var(--font-body)" }}
             >
@@ -82,7 +82,7 @@ export default function CTASection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-8xl font-black text-white tracking-normal leading-[0.95] mb-8"
+            className="text-4xl md:text-6xl lg:text-8xl font-black text-[var(--foreground)] tracking-normal leading-[0.95] mb-8"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             READY TO <span className="text-acm-blue">BUILD</span>
@@ -99,7 +99,7 @@ export default function CTASection() {
             className="text-white/40 text-base md:text-lg max-w-2xl mx-auto mb-12 leading-relaxed"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Join our community of innovators, creators, and tech enthusiasts. 
+            Join our community of innovators, creators, and tech enthusiasts.
             Whether you want to learn, build, or connect—there&apos;s a place for you here.
           </motion.p>
 
@@ -113,7 +113,7 @@ export default function CTASection() {
           >
             <Link
               href="/teams"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-acm-blue text-white font-medium text-sm uppercase tracking-normalr transition-all duration-300 hover:bg-acm-blue/90"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-acm-blue text-[var(--foreground)] font-medium text-sm uppercase tracking-normalr transition-all duration-300 hover:bg-acm-blue/90"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>Meet Our Team</span>
@@ -122,7 +122,7 @@ export default function CTASection() {
 
             <Link
               href="/blogs"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/10 text-white/70 font-medium text-sm uppercase tracking-normalr transition-all duration-300 hover:border-white/30 hover:text-white"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/10 text-white/70 font-medium text-sm uppercase tracking-normalr transition-all duration-300 hover:border-white/30 hover:text-[var(--foreground)]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               <span>Read Our Blog</span>
@@ -170,8 +170,8 @@ export default function CTASection() {
             style={{ fontFamily: "var(--font-body)" }}
           >
             Questions? Reach out at{" "}
-            <a 
-              href="mailto:usaracm@ipu.ac.in" 
+            <a
+              href="mailto:usaracm@ipu.ac.in"
               className="text-white/50 hover:text-acm-blue transition-colors duration-300"
             >
               usaracm@ipu.ac.in

@@ -70,7 +70,7 @@ export default function BlogsFeatured({
           </div>
           
           <h2
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-[0.95]"
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-[var(--foreground)] tracking-normal leading-[0.95]"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             TALES THAT <span className="text-acm-blue">INSPIRE</span>
@@ -89,7 +89,7 @@ export default function BlogsFeatured({
               onClick={() => onPostClick?.(mainPost)}
               className="lg:col-span-7 group cursor-pointer"
             >
-              <div className="relative h-full bg-[#0a0a0a] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/20">
+              <div className="relative h-full bg-[var(--surface)] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/20">
                 {/* Corner Accents */}
                 <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
                 <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
@@ -98,15 +98,15 @@ export default function BlogsFeatured({
 
                 {/* Image Section */}
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <div 
-                    className="absolute inset-0"
-                    style={{
-                      background: "linear-gradient(135deg, rgba(0,133,202,0.15) 0%, rgba(10,10,20,1) 60%, rgba(0,0,0,1) 100%)",
-                    }}
+                  <Image
+                    src={mainPost.image}
+                    alt={mainPost.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-black/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-linear-to-t from-[var(--surface)] via-black/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
                   
                   {/* Category Badge */}
                   <div className="absolute top-6 left-6 z-10">
@@ -150,7 +150,7 @@ export default function BlogsFeatured({
                 <div className="p-6 md:p-8">
                   {/* Title */}
                   <h3 
-                    className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 group-hover:text-acm-blue transition-colors duration-300 tracking-normal"
+                    className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--foreground)] mb-3 group-hover:text-acm-blue transition-colors duration-300 tracking-normal"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {mainPost.title}
@@ -269,7 +269,7 @@ function SecondaryCard({
       onClick={onClick}
       className="group cursor-pointer flex-1"
     >
-      <div className="relative h-full bg-[#0a0a0a] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/20">
+      <div className="relative h-full bg-[var(--surface)] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/20">
         {/* Corner Accents */}
         <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
         <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
@@ -277,13 +277,13 @@ function SecondaryCard({
         <div className="flex flex-col sm:flex-row h-full">
           {/* Image */}
           <div className="relative w-full sm:w-2/5 aspect-video sm:aspect-auto overflow-hidden">
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(135deg, rgba(0,133,202,${0.1 + index * 0.05}) 0%, rgba(10,10,20,1) 60%, rgba(0,0,0,1) 100%)`,
-              }}
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-linear-to-r from-transparent to-[#0a0a0a] opacity-60" />
+            <div className="absolute inset-0 bg-linear-to-r from-transparent to-[var(--surface)] opacity-60" />
             
             {/* Category */}
             <div className="absolute top-4 left-4 z-10">
@@ -299,7 +299,7 @@ function SecondaryCard({
           {/* Content */}
           <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
             <h3 
-              className="text-lg md:text-xl font-black text-white mb-2 group-hover:text-acm-blue transition-colors duration-300 tracking-normal line-clamp-2"
+              className="text-lg md:text-xl font-black text-[var(--foreground)] mb-2 group-hover:text-acm-blue transition-colors duration-300 tracking-normal line-clamp-2"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {post.title}

@@ -55,7 +55,7 @@ export default function TeamSection({
             className="flex items-center gap-6 mb-6"
           >
             <div className="flex items-center gap-3">
-              <span 
+              <span
                 className="text-[10px] md:text-[11px] font-medium tracking-[0.3em] text-acm-blue uppercase"
                 style={{ fontFamily: "var(--font-body)" }}
               >
@@ -64,7 +64,7 @@ export default function TeamSection({
               <div className="w-12 md:w-20 h-px bg-acm-blue/40" />
             </div>
             {subtitle && (
-              <span 
+              <span
                 className="text-[10px] md:text-[11px] font-light tracking-[0.4em] text-white/30 uppercase"
                 style={{ fontFamily: "var(--font-body)" }}
               >
@@ -79,7 +79,7 @@ export default function TeamSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-normal leading-[0.95] mb-4"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-[var(--foreground)] tracking-normal leading-[0.95] mb-4"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             {title}
@@ -122,13 +122,12 @@ export default function TeamSection({
             >
               What We Focus On
             </motion.h3>
-            <div className={`grid gap-4 md:gap-6 ${
-              focusAreas.length === 3 
-                ? "grid-cols-1 md:grid-cols-3" 
-                : focusAreas.length === 4 
+            <div className={`grid gap-4 md:gap-6 ${focusAreas.length === 3
+                ? "grid-cols-1 md:grid-cols-3"
+                : focusAreas.length === 4
                   ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
                   : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-            }`}>
+              }`}>
               {focusAreas.map((area, index) => {
                 const Icon = area.icon;
                 return (
@@ -137,14 +136,14 @@ export default function TeamSection({
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{ 
-                      duration: 0.6, 
+                    transition={{
+                      duration: 0.6,
                       delay: index * 0.1,
                       ease: [0.22, 1, 0.36, 1]
                     }}
                     className="group relative"
                   >
-                    <div className="relative bg-[#0a0a0a] border border-white/5 p-6 transition-all duration-500 hover:border-acm-blue/30 overflow-hidden h-full">
+                    <div className="relative bg-[var(--surface)] border border-white/5 p-6 transition-all duration-500 hover:border-acm-blue/30 overflow-hidden h-full">
                       {/* Corner Accents */}
                       <div className="absolute top-0 left-0 w-3 h-3 border-l border-t border-white/10 group-hover:border-acm-blue/40 transition-colors duration-300" />
                       <div className="absolute bottom-0 right-0 w-3 h-3 border-r border-b border-white/10 group-hover:border-acm-blue/40 transition-colors duration-300" />
@@ -157,13 +156,13 @@ export default function TeamSection({
                       </div>
 
                       {/* Content */}
-                      <h4 
-                        className="text-lg font-black text-white mb-2 tracking-normal group-hover:text-acm-blue transition-colors duration-300"
+                      <h4
+                        className="text-lg font-black text-[var(--foreground)] mb-2 tracking-normal group-hover:text-acm-blue transition-colors duration-300"
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
                         {area.title}
                       </h4>
-                      <p 
+                      <p
                         className="text-white/40 text-sm leading-[1.7]"
                         style={{ fontFamily: "var(--font-body)" }}
                       >
@@ -178,20 +177,6 @@ export default function TeamSection({
               })}
             </div>
           </div>
-        )}
-
-        {/* Team Leads Label */}
-        {focusAreas && focusAreas.length > 0 && (
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-sm font-medium tracking-[0.3em] text-white/30 uppercase mb-8"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            Team Members
-          </motion.h3>
         )}
 
         {/* Members Grid */}

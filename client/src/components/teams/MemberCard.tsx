@@ -12,7 +12,7 @@ interface MemberCardProps {
 
 export default function MemberCard({ member, index }: MemberCardProps) {
   const isTBA = member.name === "TBF" || member.name === "To be filled" || member.name === "To Be Announced" || member.name === "TBD";
-  const hasImage = member.imageUrl && !isTBA;
+  const hasImage = !!member.imageUrl;
 
   return (
     <motion.div
@@ -27,7 +27,7 @@ export default function MemberCard({ member, index }: MemberCardProps) {
       className="group relative"
     >
       {/* Main Card */}
-      <div className="relative bg-[#0a0a0a] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/30">
+      <div className="relative bg-[var(--surface)] border border-white/5 overflow-hidden transition-all duration-500 hover:border-acm-blue/30">
         {/* Corner Accents */}
         <div className="absolute top-0 left-0 w-4 h-4 border-l border-t border-white/10 group-hover:border-acm-blue/40 transition-colors duration-300 z-10" />
         <div className="absolute top-0 right-0 w-4 h-4 border-r border-t border-white/10 group-hover:border-acm-blue/40 transition-colors duration-300 z-10" />
@@ -45,7 +45,7 @@ export default function MemberCard({ member, index }: MemberCardProps) {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-linear-to-t from-[var(--surface)] via-transparent to-transparent opacity-80" />
             </>
           ) : (
             <>
@@ -76,18 +76,18 @@ export default function MemberCard({ member, index }: MemberCardProps) {
                     className="w-24 h-24 rounded-full bg-linear-to-br from-acm-blue/20 to-acm-blue/5 blur-2xl"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div 
+                    <div
                       className="text-4xl font-black text-white/10"
                       style={{ fontFamily: "var(--font-heading)" }}
                     >
-                      {isTBA ? "?" : member.name.charAt(0)}
+                      {member.name.charAt(0)}
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Gradient Overlay for placeholder */}
-              <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[var(--surface)] via-[var(--surface)]/50 to-transparent" />
             </>
           )}
 
@@ -98,7 +98,7 @@ export default function MemberCard({ member, index }: MemberCardProps) {
 
           {/* Index Badge */}
           <div className="absolute top-3 left-3 z-10">
-            <span 
+            <span
               className="text-[10px] tracking-[0.2em] text-white/20 font-medium"
               style={{ fontFamily: "var(--font-body)" }}
             >
@@ -108,10 +108,10 @@ export default function MemberCard({ member, index }: MemberCardProps) {
         </div>
 
         {/* Info Section */}
-        <div className="relative p-5 bg-[#0a0a0a]">
+        <div className="relative p-5 bg-[var(--surface)]">
           {/* Role Badge */}
           <div className="mb-3">
-            <span 
+            <span
               className="inline-block px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-acm-blue/70 border border-acm-blue/20 bg-acm-blue/5 group-hover:bg-acm-blue/10 group-hover:border-acm-blue/30 transition-all duration-300"
               style={{ fontFamily: "var(--font-body)" }}
             >
@@ -121,11 +121,10 @@ export default function MemberCard({ member, index }: MemberCardProps) {
 
           {/* Name */}
           <h3
-            className={`text-lg md:text-xl font-black tracking-normal transition-all duration-300 mb-3 ${
-              isTBA
-                ? "text-white/20 italic"
-                : "text-white group-hover:text-acm-blue"
-            }`}
+            className={`text-lg md:text-xl font-black tracking-normal transition-all duration-300 mb-3 ${isTBA
+              ? "text-white/20 italic"
+              : "text-[var(--foreground)] group-hover:text-acm-blue"
+              }`}
             style={{ fontFamily: "var(--font-heading)" }}
           >
             {isTBA ? "To Be Announced" : member.name}
@@ -147,6 +146,7 @@ export default function MemberCard({ member, index }: MemberCardProps) {
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${member.name}'s LinkedIn profile`}
                 className="p-2 bg-white/5 border border-white/5 hover:border-acm-blue/30 hover:bg-acm-blue/10 transition-all duration-300"
               >
                 <Linkedin className="w-4 h-4 text-white/40 hover:text-acm-blue transition-colors" />

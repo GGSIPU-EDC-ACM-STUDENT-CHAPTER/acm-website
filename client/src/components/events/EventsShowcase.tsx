@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, MapPin, Users, Zap, Clock } from "lucide-react";
 import { eventsData, EventData } from "@/data/eventsData";
 
@@ -32,7 +33,7 @@ function EventCard({ event, index }: EventCardProps) {
         <div
           className={`relative flex flex-col ${
             isEven ? "md:flex-row" : "md:flex-row-reverse"
-          } gap-8 md:gap-12 p-6 md:p-10 bg-[#0a0a0a] border border-white/5 hover:border-acm-blue/20 transition-all duration-500`}
+          } gap-8 md:gap-12 p-6 md:p-10 bg-[var(--surface)] border border-white/5 hover:border-acm-blue/20 transition-all duration-500`}
         >
           {/* Corner Accents */}
           <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-white/10 group-hover:border-acm-blue/40 transition-colors duration-500 z-10" />
@@ -65,7 +66,7 @@ function EventCard({ event, index }: EventCardProps) {
 
             {/* Title */}
             <h3
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 group-hover:text-acm-blue transition-colors leading-tight"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-[var(--foreground)] mb-3 group-hover:text-acm-blue transition-colors leading-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {event.title}
@@ -130,35 +131,51 @@ function EventCard({ event, index }: EventCardProps) {
             {/* Corner accents for visual */}
             <div className="absolute top-0 left-0 w-4 h-4 border-l border-t border-white/10 z-10" />
             <div className="absolute bottom-0 right-0 w-4 h-4 border-r border-b border-white/10 z-10" />
-            {/* Category Icon Display */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                className="w-24 h-24 md:w-32 md:h-32 rounded-full opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500 flex items-center justify-center"
-                style={{ background: `${event.categoryColor}30` }}
-              >
-                <Zap 
-                  className="w-12 h-12 md:w-16 md:h-16"
-                  style={{ color: event.categoryColor }}
+            
+            {/* Event Image or Category Icon */}
+            {event.image ? (
+              <>
+                <Image
+                  src={event.image}
+                  alt={event.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-              </motion.div>
-            </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </>
+            ) : (
+              <>
+                {/* Category Icon Display */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div
+                    className="w-24 h-24 md:w-32 md:h-32 rounded-full opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500 flex items-center justify-center"
+                    style={{ background: `${event.categoryColor}30` }}
+                  >
+                    <Zap 
+                      className="w-12 h-12 md:w-16 md:h-16"
+                      style={{ color: event.categoryColor }}
+                    />
+                  </motion.div>
+                </div>
 
-            {/* Category Color Overlay */}
-            <div
-              className="absolute inset-0 opacity-20"
-              style={{
-                background: `radial-gradient(circle at 50% 50%, ${event.categoryColor}30, transparent 70%)`,
-              }}
-            />
+                {/* Category Color Overlay */}
+                <div
+                  className="absolute inset-0 opacity-20"
+                  style={{
+                    background: `radial-gradient(circle at 50% 50%, ${event.categoryColor}30, transparent 70%)`,
+                  }}
+                />
 
-            {/* Grid Pattern */}
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)`,
-                backgroundSize: "24px 24px",
-              }}
-            />
+                {/* Grid Pattern */}
+                <div
+                  className="absolute inset-0 opacity-30"
+                  style={{
+                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)`,
+                    backgroundSize: "24px 24px",
+                  }}
+                />
+              </>
+            )}
 
             {/* Corner Decorations */}
             <div className="absolute top-3 left-3 w-6 h-6 border-l border-t border-white/10" />
@@ -248,7 +265,7 @@ export default function EventsShowcase() {
               </div>
               
               <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-normal"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[var(--foreground)] tracking-normal"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 DON&apos;T MISS <span className="text-green-400">OUT</span>
@@ -288,7 +305,7 @@ export default function EventsShowcase() {
           
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <h2
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-normal"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[var(--foreground)] tracking-normal"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               EXPLORE THE <span className="text-acm-blue">ARCHIVE</span>
