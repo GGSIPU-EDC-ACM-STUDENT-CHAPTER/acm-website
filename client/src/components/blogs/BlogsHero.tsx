@@ -1,272 +1,221 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
+import Image from "next/image";
 
 export default function BlogsHero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Deterministic floating particles
-  const particles = Array.from({ length: 50 }, (_, i) => {
-    const seed = i * 7919;
-    const rand1 = ((seed * 9301 + 49297) % 233280) / 233280;
-    const rand2 = ((seed * 7621 + 81237) % 233280) / 233280;
-    const rand3 = ((seed * 3571 + 91291) % 233280) / 233280;
-    return {
-      id: i,
-      x: rand1 * 100,
-      y: rand2 * 100,
-      size: 1 + rand3 * 3,
-      duration: 10 + rand1 * 20,
-      delay: rand2 * 10,
-    };
-  });
-
-  // Cinematic light beams
-  const lightBeams = Array.from({ length: 5 }, (_, i) => ({
-    id: i,
-    left: 10 + i * 20,
-    width: 2 + (i % 3),
-    duration: 8 + i * 2,
-    delay: i * 1.5,
-  }));
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.05]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const textY = useTransform(scrollYProgress, [0, 0.5], [0, 80]);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[110vh] overflow-hidden bg-black"
+      className="relative min-h-[120vh] w-full overflow-hidden bg-[var(--background)]"
     >
-      {/* Fixed hero content */}
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Ambient background */}
-        <div className="absolute inset-0">
-          {/* Deep space gradient */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `
-                radial-gradient(ellipse 120% 80% at 50% -20%, rgba(0, 133, 202, 0.15), transparent 50%),
-                radial-gradient(ellipse 80% 60% at 80% 80%, rgba(0, 133, 202, 0.08), transparent 40%),
-                radial-gradient(ellipse 60% 40% at 20% 90%, rgba(0, 163, 255, 0.06), transparent 30%),
-                linear-gradient(180deg, #000000 0%, #030308 50%, #000000 100%)
-              `,
+      {/* Hero Container */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Background Image with Parallax */}
+        <motion.div
+          style={{ y: imageY, scale }}
+          className="absolute inset-0 w-full h-[120%] -top-[10%]"
+        >
+          <Image
+            src="/blogs/hero.webp"
+            alt="ACM Blogs"
+            fill
+            priority
+            fetchPriority="high"
+            className="object-cover object-center opacity-60"
+            sizes="100vw"
+          />
+        </motion.div>
+
+        {/* Animated Gradient Orbs */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Primary Blue Orb - Top Right */}
+          <motion.div
+            animate={{
+              x: [0, 30, 0],
+              y: [0, -20, 0],
+              scale: [1, 1.1, 1],
             }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute -top-1/4 -right-1/4 h-[800px] w-[800px] rounded-full bg-acm-blue/10 blur-[150px]"
           />
 
-          {/* Cinematic light beams */}
-          {mounted &&
-            lightBeams.map((beam) => (
-              <motion.div
-                key={beam.id}
-                className="absolute top-0 h-full opacity-[0.03]"
-                style={{
-                  left: `${beam.left}%`,
-                  width: `${beam.width}px`,
-                  background:
-                    "linear-gradient(180deg, transparent, rgba(0, 133, 202, 0.8) 30%, rgba(0, 133, 202, 0.8) 70%, transparent)",
-                }}
-                animate={{
-                  opacity: [0.02, 0.06, 0.02],
-                  scaleY: [0.8, 1.2, 0.8],
-                }}
-                transition={{
-                  duration: beam.duration,
-                  repeat: Infinity,
-                  delay: beam.delay,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-
-          {/* Floating particles */}
-          {mounted &&
-            particles.map((p) => (
-              <motion.div
-                key={p.id}
-                className="absolute rounded-full bg-white/20"
-                style={{
-                  left: `${p.x}%`,
-                  top: `${p.y}%`,
-                  width: p.size,
-                  height: p.size,
-                }}
-                animate={{
-                  y: [0, -150, 0],
-                  opacity: [0, 0.6, 0],
-                  scale: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: p.duration,
-                  repeat: Infinity,
-                  delay: p.delay,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-
-          {/* Vignette overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)",
+          {/* Secondary Orb - Bottom Left */}
+          <motion.div
+            animate={{
+              x: [0, -20, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.15, 1],
             }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute -bottom-1/4 -left-1/4 h-[700px] w-[700px] rounded-full bg-acm-blue/5 blur-[180px]"
+          />
+
+          {/* Accent Orb - Center */}
+          <motion.div
+            animate={{
+              x: [0, 40, 0],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-1/3 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-white/2 blur-[100px]"
           />
         </div>
 
-        {/* Main content */}
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-black/20 to-black/50" />
+
+        {/* Main Content */}
         <motion.div
-          style={{ y, opacity, scale }}
-          className="relative z-10 flex h-full flex-col items-center justify-center px-6 will-change-transform"
+          style={{ opacity, y: textY }}
+          className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 lg:px-20"
         >
-          {/* Cinematic intro text */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
-            className="mb-6 flex items-center gap-6"
-          >
-            <span className="h-px w-16 bg-linear-to-r from-transparent to-acm-blue/50" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.6em] text-white/40">
-              Stories from the Chapter
-            </span>
-            <span className="h-px w-16 bg-linear-to-l from-transparent to-acm-blue/50" />
-          </motion.div>
-
-          {/* Main title with cinematic reveal */}
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                duration: 1.4,
-                delay: 0.5,
-                ease: [0.25, 1, 0.5, 1],
-              }}
-              className="text-center font-display text-7xl font-bold leading-[0.85] tracking-tight md:text-9xl lg:text-[12rem]"
-            >
-              <span className="block bg-linear-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
-                The
-              </span>
-            </motion.h1>
-          </div>
-
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                duration: 1.4,
-                delay: 0.7,
-                ease: [0.25, 1, 0.5, 1],
-              }}
-              className="text-center font-display text-7xl font-bold leading-[0.85] tracking-tight md:text-9xl lg:text-[12rem]"
-            >
-              <span className="block bg-linear-to-b from-acm-blue via-acm-blue-light to-acm-blue/50 bg-clip-text text-transparent">
-                Chronicle
-              </span>
-            </motion.h1>
-          </div>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="mt-8 max-w-2xl text-center text-lg leading-relaxed text-white/50 md:text-xl"
-          >
-            Where ideas take flight and stories unfold. Dive into tales of
-            innovation, creativity, and the minds shaping tomorrow.
-          </motion.p>
-
-          {/* Decorative elements */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="mt-16 flex flex-col items-center"
-          >
-            <div className="flex items-center gap-8">
-              <div className="h-px w-24 bg-linear-to-r from-transparent to-white/20" />
-              <div className="flex gap-2">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="h-1.5 w-1.5 rounded-full bg-acm-blue/60"
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.4, 1, 0.4],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="h-px w-24 bg-linear-to-l from-transparent to-white/20" />
-            </div>
-          </motion.div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            style={{ y: textY }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 2 }}
-            className="absolute bottom-16 left-1/2 -translate-x-1/2"
-          >
+          <div className="max-w-[1400px] mx-auto w-full">
+            {/* Top Row - Logo & Label */}
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="flex flex-col items-center gap-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="flex items-center gap-4 mb-8"
             >
-              <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/30">
-                Scroll to discover
+              <Image
+                src="/ACM_Logo_white_text.webp"
+                alt="ACM Logo"
+                width={100}
+                height={33}
+                className="h-8 w-auto"
+              />
+              <div className="h-px w-8 bg-white/60" />
+              <span className="font-mono text-xs tracking-[0.2em] text-white/60">
+                STORIES & INSIGHTS
               </span>
-              <div className="relative h-12 w-px overflow-hidden">
-                <motion.div
-                  className="absolute inset-0 bg-linear-to-b from-acm-blue to-transparent"
-                  animate={{ y: ["-100%", "100%"] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </div>
             </motion.div>
-          </motion.div>
-        </motion.div>
 
-        {/* Film grain overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 z-20 opacity-[0.015]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
+            {/* Main Title */}
+            <motion.div className="overflow-hidden mb-2">
+              <motion.h1
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="text-[18vw] sm:text-[14vw] md:text-[12vw] lg:text-[10vw] font-bold text-[var(--foreground)] leading-[0.85] tracking-tight"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                THE
+              </motion.h1>
+            </motion.div>
+
+            {/* Subtitle with Gradient */}
+            <motion.div className="overflow-hidden mb-8">
+              <motion.h2
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.45,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="text-[18vw] sm:text-[14vw] md:text-[12vw] lg:text-[10vw] font-bold leading-[0.85] tracking-tight"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  background:
+                    "linear-gradient(135deg, #0085CA 0%, #00A3FF 50%, #0085CA 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                CHRONICLE
+              </motion.h2>
+            </motion.div>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed"
+            >
+              <span className="text-[var(--foreground)]">Ideas</span> that inspire.{" "}
+              <span className="text-[var(--foreground)]">Stories</span> that resonate.
+              Dive into our collection of{" "}
+              <span className="text-acm-blue">tech insights and perspectives</span>.
+            </motion.p>
+
+            {/* Bottom Info */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="mt-16 flex flex-wrap items-end justify-between gap-8 border-t border-[var(--border)] pt-8"
+            >
+              <div className="space-y-1">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
+                  Articles
+                </p>
+                <p className="text-sm font-medium text-white">10+ Stories</p>
+              </div>
+
+              <div className="space-y-1">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
+                  Topics
+                </p>
+                <p className="text-sm font-medium text-white">Tech & Beyond</p>
+              </div>
+
+              <div className="space-y-1">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/60">
+                  Authors
+                </p>
+                <p className="text-sm font-medium text-white">ACM Community</p>
+              </div>
+
+              {/* Scroll Indicator */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="hidden md:block"
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-subtle)]">
+                    Scroll
+                  </span>
+                  <div className="h-12 w-px bg-linear-to-b from-acm-blue to-transparent" />
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
+
+      {/* Bottom Gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[var(--background)] to-transparent pointer-events-none z-30" />
     </section>
   );
 }

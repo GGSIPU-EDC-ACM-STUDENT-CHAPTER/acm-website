@@ -1,20 +1,11 @@
-"use client";
+import { Metadata } from "next";
+import ProjectsPageClient from "./ProjectsPageClient";
 
-import HeroSection from "@/components/projects/HeroSection";
-import TransitionSection from "@/components/projects/TransitionSection";
-import ProjectsShowcase from "@/components/projects/ProjectsShowcase";
-import FeaturedDeepDive from "@/components/projects/FeaturedDeepDive";
-import ClosingStatement from "@/components/projects/ClosingStatement";
-import { projects } from "@/data/projectsData";
+export const metadata: Metadata = {
+  title: "Our Projects",
+  description: "Explore innovative projects built by GGSIPU EDC ACM members — from web apps to AI solutions, robotics to sustainability tech.",
+};
 
 export default function ProjectsPage() {
-  return (
-    <main className="bg-black text-white selection:bg-acm-blue/30">
-      <HeroSection />
-      <TransitionSection />
-      <ProjectsShowcase projects={projects} />
-      <FeaturedDeepDive projects={projects} />
-      <ClosingStatement />
-    </main>
-  );
+  return <ProjectsPageClient />;
 }

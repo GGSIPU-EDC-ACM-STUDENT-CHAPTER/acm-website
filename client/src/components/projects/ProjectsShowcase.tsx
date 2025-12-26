@@ -93,7 +93,7 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
     >
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-black" />
+        <div className="absolute inset-0 bg-[var(--background)]" />
 
         {/* Section label */}
         <motion.div
@@ -166,7 +166,7 @@ function ProjectCounter({
 
   return (
     <div className="flex items-baseline gap-1 font-mono md:gap-2">
-      <motion.span className="text-xl font-bold text-white md:text-3xl">
+      <motion.span className="text-xl font-bold text-[var(--foreground)] md:text-3xl">
         {currentIndex}
       </motion.span>
       <span className="text-white/30">/</span>
@@ -244,7 +244,7 @@ function ProjectProgressDot({
       />
       <motion.span
         style={{ opacity }}
-        className="font-mono text-[10px] uppercase tracking-wider text-white/60 opacity-0 transition-opacity group-hover:opacity-100"
+        className="font-mono text-[10px] uppercase tracking-normalr text-white/60 opacity-0 transition-opacity group-hover:opacity-100"
       >
         {title}
       </motion.span>
@@ -286,14 +286,14 @@ function ProjectSlide({ project, index }: { project: Project; index: number }) {
 
             {/* Year badge */}
             <div className="absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/60 px-3 py-1.5 backdrop-blur-md md:bottom-6 md:right-6 md:px-4 md:py-2">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-white/70 md:text-xs">
+              <span className="font-mono text-[10px] uppercase tracking-normalr text-white/70 md:text-xs">
                 {project.year}
               </span>
             </div>
 
             {/* Role badge */}
             <div className="absolute left-3 top-3 md:left-6 md:top-6">
-              <span className="rounded-full border border-white/10 bg-black/40 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-white/50 backdrop-blur-md md:px-3 md:py-1.5 md:text-[10px]">
+              <span className="rounded-full border border-white/10 bg-black/40 px-2.5 py-1 font-mono text-[9px] uppercase tracking-normalr text-white/50 backdrop-blur-md md:px-3 md:py-1.5 md:text-[10px]">
                 {project.role}
               </span>
             </div>
@@ -321,7 +321,7 @@ function ProjectSlide({ project, index }: { project: Project; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="-mt-8 font-display text-2xl font-bold text-white md:-mt-16 md:text-6xl lg:text-7xl"
+            className="-mt-8 font-display text-2xl font-bold text-[var(--foreground)] md:-mt-16 md:text-6xl lg:text-7xl"
           >
             {project.title}
           </motion.h2>
@@ -359,7 +359,7 @@ function ProjectSlide({ project, index }: { project: Project; index: number }) {
             {project.tags.slice(0, 4).map((tag) => (
               <span
                 key={tag}
-                className="shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-white/50 md:px-4 md:py-1.5 md:text-xs"
+                className="shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-normalr text-white/50 md:px-4 md:py-1.5 md:text-xs"
               >
                 {tag}
               </span>
@@ -379,7 +379,7 @@ function ProjectSlide({ project, index }: { project: Project; index: number }) {
                 {i > 0 && (
                   <span className="absolute -left-2 top-1/2 hidden h-3 w-px -translate-y-1/2 bg-white/10 md:-left-3 md:block" />
                 )}
-                <span className="font-mono text-[9px] uppercase tracking-wider text-white/40 md:text-xs">
+                <span className="font-mono text-[9px] uppercase tracking-normalr text-white/40 md:text-xs">
                   {metric}
                 </span>
               </div>
